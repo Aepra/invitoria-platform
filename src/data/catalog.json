@@ -1,0 +1,110 @@
+[
+  {
+    "id": "theme-a",
+    "name": "Rose Gold",
+    "description": "Soft and elegant pink hues, radiating warmth and classic romance.",
+    "color": "from-[#FF8FA3] to-[#FFB3C1]",
+    "icon": "gem",
+    "demoLink": "/undangan-07",
+    "tags": ["Elegant", "Pink", "Classic"]
+  },
+  {
+    "id": "theme-b",
+    "name": "Blue Diamond",
+    "description": "Crystal blue nuances that are luxurious and modern. Very clear and classy.",
+    "color": "from-[#89CFF0] to-[#75E6DA]",
+    "icon": "snowflake",
+    "demoLink": "/undangan-08",
+    "tags": ["Modern", "Luxury", "Blue"]
+  },
+  {
+    "id": "theme-c",
+    "name": "Sage Emerald",
+    "description": "Luxurious and calming natural green nuances. Perfect for botanical outdoor concepts.",
+    "color": "from-[#4A7C59] to-[#8FC0A9]",
+    "icon": "leaf",
+    "demoLink": "/undangan-09",
+    "tags": ["Outdoor", "Botanical", "Green"]
+  },
+  {
+    "id": "theme-d",
+    "name": "Luxury Gold",
+    "description": "Luminous luxury gold nuances that radiate the grandeur of a royal wedding.",
+    "color": "from-[#D4AF37] to-[#F3E5AB]",
+    "icon": "crown",
+    "demoLink": "/undangan-10",
+    "tags": ["Royal", "Luxury", "Gold"]
+  },
+  {
+    "id": "theme-e",
+    "name": "Royal Lavender",
+    "description": "Exotic and romantic purple nuances that bring magical and elegant charm.",
+    "color": "from-[#9B59B6] to-[#C39BD3]",
+    "icon": "moon",
+    "demoLink": "/undangan-11",
+    "tags": ["Exotic", "Romantic", "Purple"]
+  },
+  {
+    "id": "theme-f",
+    "name": "Ruby Burgundy",
+    "description": "Bold and mesmerizing ruby red hues that provide a super classic impression.",
+    "color": "from-[#800020] to-[#E0115F]",
+    "icon": "heart",
+    "demoLink": "/undangan-12",
+    "tags": ["Classic", "Bold", "Red"]
+  },
+  {
+    "id": "project-1",
+    "name": "Modern Classic",
+    "description": "Elegant and responsive invitation design featuring a countdown, RSVP, and interactive gallery.",
+    "color": "from-[#a18cd1] to-[#fbc2eb]",
+    "icon": "gem",
+    "demoLink": "/undangan-01",
+    "tags": ["Classic", "Modern", "Interactive"]
+  },
+  {
+    "id": "project-2",
+    "name": "Minimalist Chic",
+    "description": "Clean and minimalist invitation appearance, focusing on beautiful typography and easy access to information.",
+    "color": "from-[#84fab0] to-[#8fd3f4]",
+    "icon": "leaf",
+    "demoLink": "/undangan-02",
+    "tags": ["Minimalist", "Simple", "Clean"]
+  },
+  {
+    "id": "project-3",
+    "name": "Royal 01",
+    "description": "Premium collection with exclusive and majestic royal blue accents, perfect for a high-class noble wedding party.",
+    "color": "from-[#1e3c72] to-[#2a5298]",
+    "icon": "crown",
+    "demoLink": "/undangan-03",
+    "tags": ["Royal", "Luxury", "Blue"]
+  },
+  {
+    "id": "project-4",
+    "name": "Premium Floral",
+    "description": "Premium collection with aesthetic floral decorations and smooth animations in every section.",
+    "color": "from-[#e0c3fc] to-[#8ec5fc]",
+    "icon": "heart",
+    "demoLink": "/undangan-04",
+    "tags": ["Floral", "Aesthetic", "Soft"]
+  },
+  {
+    "id": "project-5",
+    "name": "Premium Rustic",
+    "description": "Rustic and natural nuances, providing a warm, intimate, and modern impression.",
+    "color": "from-[#f6d365] to-[#fda085]",
+    "icon": "leaf",
+    "demoLink": "/undangan-05",
+    "tags": ["Rustic", "Natural", "Warm"]
+  },
+  {
+    "id": "project-6",
+    "name": "Ocean Blue",
+    "description": "Stunning design with an ocean blue color palette, calm and refreshing.",
+    "color": "from-[#89f7fe] to-[#66a6ff]",
+    "icon": "snowflake",
+    "demoLink": "/undangan-06",
+    "tags": ["Minimalist", "Blue", "Fresh"]
+  }
+]

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Undangan Digital Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        dark: '#0B0F19',
+                        darker: '#05070A',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'aurora': 'aurora 15s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        aurora: {
+                            '0%': { transform: 'scale(1) rotate(0deg)' },
+                            '100%': { transform: 'scale(1.5) rotate(45deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0B0F19;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+        
+        /* Custom Theme Glow Effects on Hover */
+        .card-a:hover { box-shadow: 0 10px 40px 0 rgba(255, 143, 163, 0.3); border-color: rgba(255, 143, 163, 0.5); }
+        .card-b:hover { box-shadow: 0 10px 40px 0 rgba(137, 207, 240, 0.3); border-color: rgba(137, 207, 240, 0.5); }
+        .card-c:hover { box-shadow: 0 10px 40px 0 rgba(74, 124, 89, 0.3); border-color: rgba(74, 124, 89, 0.5); }
+        .card-d:hover { box-shadow: 0 10px 40px 0 rgba(212, 175, 55, 0.3); border-color: rgba(212, 175, 55, 0.5); }
+        .card-e:hover { box-shadow: 0 10px 40px 0 rgba(155, 89, 182, 0.3); border-color: rgba(155, 89, 182, 0.5); }
+        .card-f:hover { box-shadow: 0 10px 40px 0 rgba(128, 0, 32, 0.3); border-color: rgba(128, 0, 32, 0.5); }
+        .card-g:hover { box-shadow: 0 10px 40px 0 rgba(226, 114, 91, 0.3); border-color: rgba(226, 114, 91, 0.5); }
+        .card-h:hover { box-shadow: 0 10px 40px 0 rgba(192, 192, 192, 0.3); border-color: rgba(192, 192, 192, 0.5); }
+        
+        .gradient-text {
+            background: linear-gradient(to right, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-white/30">
+
+    <!-- Background Effects -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-purple-900/20 rounded-full blur-[100px] animate-aurora"></div>
+        <div class="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] bg-blue-900/20 rounded-full blur-[100px] animate-aurora" style="animation-delay: -5s; animation-direction: reverse;"></div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-6 py-20 min-h-screen flex flex-col items-center">
+        
+        <!-- Header -->
+        <div class="text-center mb-20 animate-float">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full glass-card mb-6 border border-white/20 text-white">
+                <i class="fas fa-crown text-2xl"></i>
+            </div>
+            <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4 tracking-wide gradient-text">Premium Collection</h1>
+            <p class="text-white/60 font-medium tracking-widest uppercase text-sm mb-8">Katalog Undangan Digital Eksklusif</p>
+            <div class="w-24 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Catalog Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
+            
+            <!-- Theme A -->
+            <div class="glass-card card-a rounded-3xl p-6 group flex flex-col h-full">
+                <div class="w-full aspect-video rounded-2xl mb-6 bg-gradient-to-br from-[#FF8FA3] to-[#FFB3C1] flex items-center justify-center shadow-lg relative overflow-hidden">
+                    <i class="fas fa-gem text-4xl text-white/80 drop-shadow-md"></i>
+                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <h3 class="font-serif text-2xl font-bold mb-2">Rose Gold</h3>
+                <p class="text-white/50 text-sm mb-8 flex-grow">Nuansa pink lembut dan elegan, memancarkan kehangatan dan keromantisan klasik.</p>
+                <a href="special-a.html" target="_blank" class="w-full py-3 px-4 rounded-xl border border-white/20 text-center font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-dark transition-all duration-300">
+                    Lihat Demo <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Theme B -->
+            <div class="glass-card card-b rounded-3xl p-6 group flex flex-col h-full">
+                <div class="w-full aspect-video rounded-2xl mb-6 bg-gradient-to-br from-[#89CFF0] to-[#75E6DA] flex items-center justify-center shadow-lg relative overflow-hidden">
+                    <i class="far fa-snowflake text-4xl text-white/80 drop-shadow-md"></i>
+                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <h3 class="font-serif text-2xl font-bold mb-2">Blue Diamond</h3>
+                <p class="text-white/50 text-sm mb-8 flex-grow">Nuansa biru kristal yang mewah dan modern. Sangat jernih dan berkelas.</p>
+                <a href="special-b.html" target="_blank" class="w-full py-3 px-4 rounded-xl border border-white/20 text-center font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-dark transition-all duration-300">
+                    Lihat Demo <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Theme C -->
+            <div class="glass-card card-c rounded-3xl p-6 group flex flex-col h-full">
+                <div class="w-full aspect-video rounded-2xl mb-6 bg-gradient-to-br from-[#4A7C59] to-[#8FC0A9] flex items-center justify-center shadow-lg relative overflow-hidden">
+                    <i class="fas fa-leaf text-4xl text-white/80 drop-shadow-md"></i>
+                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <h3 class="font-serif text-2xl font-bold mb-2">Sage Emerald</h3>
+                <p class="text-white/50 text-sm mb-8 flex-grow">Nuansa hijau alam yang mewah dan menenangkan. Cocok untuk konsep outdoor botani.</p>
+                <a href="special-c.html" target="_blank" class="w-full py-3 px-4 rounded-xl border border-white/20 text-center font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-dark transition-all duration-300">
+                    Lihat Demo <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Theme D -->
+            <div class="glass-card card-d rounded-3xl p-6 group flex flex-col h-full">
+                <div class="w-full aspect-video rounded-2xl mb-6 bg-gradient-to-br from-[#D4AF37] to-[#F3E5AB] flex items-center justify-center shadow-lg relative overflow-hidden">
+                    <i class="fas fa-chess-queen text-4xl text-white/80 drop-shadow-md"></i>
+                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <h3 class="font-serif text-2xl font-bold mb-2">Luxury Gold</h3>
+                <p class="text-white/50 text-sm mb-8 flex-grow">Nuansa emas mewah bercahaya yang memancarkan kemegahan pernikahan kerajaan (Royal).</p>
+                <a href="special-d.html" target="_blank" class="w-full py-3 px-4 rounded-xl border border-white/20 text-center font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-dark transition-all duration-300">
+                    Lihat Demo <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Theme E -->
+            <div class="glass-card card-e rounded-3xl p-6 group flex flex-col h-full">
+                <div class="w-full aspect-video rounded-2xl mb-6 bg-gradient-to-br from-[#9B59B6] to-[#C39BD3] flex items-center justify-center shadow-lg relative overflow-hidden">
+                    <i class="fas fa-moon text-4xl text-white/80 drop-shadow-md"></i>
+                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <h3 class="font-serif text-2xl font-bold mb-2">Royal Lavender</h3>
+                <p class="text-white/50 text-sm mb-8 flex-grow">Nuansa ungu eksotis nan romantis yang membawa keajaiban magis nan elegan.</p>
+                <a href="special-e.html" target="_blank" class="w-full py-3 px-4 rounded-xl border border-white/20 text-center font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-dark transition-all duration-300">
+                    Lihat Demo <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Theme F -->
+            <div class="glass-card card-f rounded-3xl p-6 group flex flex-col h-full">
+                <div class="w-full aspect-video rounded-2xl mb-6 bg-gradient-to-br from-[#800020] to-[#E0115F] flex items-center justify-center shadow-lg relative overflow-hidden">
+                    <i class="fas fa-wine-glass text-4xl text-white/80 drop-shadow-md"></i>
+                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <h3 class="font-serif text-2xl font-bold mb-2">Ruby Burgundy</h3>
+                <p class="text-white/50 text-sm mb-8 flex-grow">Nuansa merah delima yang berani, memukau, dan memberikan kesan super klasik.</p>
+                <a href="special-f.html" target="_blank" class="w-full py-3 px-4 rounded-xl border border-white/20 text-center font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-dark transition-all duration-300">
+                    Lihat Demo <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Theme G -->
+            <div class="glass-card card-g rounded-3xl p-6 group flex flex-col h-full">
+                <div class="w-full aspect-video rounded-2xl mb-6 bg-gradient-to-br from-[#E2725B] to-[#F4A460] flex items-center justify-center shadow-lg relative overflow-hidden">
+                    <i class="fas fa-sun text-4xl text-white/80 drop-shadow-md"></i>
+                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <h3 class="font-serif text-2xl font-bold mb-2">Autumn Terracotta</h3>
+                <p class="text-white/50 text-sm mb-8 flex-grow">Nuansa oranye bata kecoklatan yang menghadirkan kehangatan musim gugur sangat estetik.</p>
+                <a href="special-g.html" target="_blank" class="w-full py-3 px-4 rounded-xl border border-white/20 text-center font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-dark transition-all duration-300">
+                    Lihat Demo <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Theme H -->
+            <div class="glass-card card-h rounded-3xl p-6 group flex flex-col h-full">
+                <div class="w-full aspect-video rounded-2xl mb-6 bg-gradient-to-br from-[#C0C0C0] to-[#808080] flex items-center justify-center shadow-lg relative overflow-hidden">
+                    <i class="fas fa-yin-yang text-4xl text-white/80 drop-shadow-md"></i>
+                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <h3 class="font-serif text-2xl font-bold mb-2">Monochrome Silver</h3>
+                <p class="text-white/50 text-sm mb-8 flex-grow">Nuansa hitam, putih, dan perak yang super minimalis, elegan, dan abadi sepanjang zaman.</p>
+                <a href="special-h.html" target="_blank" class="w-full py-3 px-4 rounded-xl border border-white/20 text-center font-semibold text-sm uppercase tracking-wider hover:bg-white hover:text-dark transition-all duration-300">
+                    Lihat Demo <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+        </div>
+        
+        <!-- Standard Invitation Link -->
+        <div class="mt-20">
+            <a href="undangan_standar.html" class="text-white/40 hover:text-white text-sm transition-colors border-b border-white/20 hover:border-white pb-1">
+                <i class="fas fa-history mr-2"></i> Lihat Undangan Versi Standar (Lama)
+            </a>
+        </div>
+        
+        <div class="mt-12 text-center text-white/30 text-xs">
+            &copy; 2026 Premium Wedding Invitation Catalog
+        </div>
+    </div>
+</body>
+</html>

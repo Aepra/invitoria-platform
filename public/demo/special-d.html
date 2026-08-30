@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Wedding of Abel & Suci</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#D4AF37', // Diamond Blue
+                        secondary: '#E1F5FE', // Ice Blue
+                        dark: '#8B6508', // Soft Slate Blue for elegant, readable text
+                        light: '#F0FBFF', // Very light blue
+                        accent: '#FFD700' // Bright cyan
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        script: ['"Dancing Script"', 'cursive'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS for Shapes & Animations -->
+    <style>
+        body { overflow: hidden; background-color: #1a1a1a; }
+        
+        #main-content {
+            height: 100dvh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        #main-content::-webkit-scrollbar { width: 4px; }
+        #main-content::-webkit-scrollbar-track { background: transparent; }
+        #main-content::-webkit-scrollbar-thumb { background: #FF8FA3; border-radius: 10px; }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.2);
+        }
+        
+        .glass-panel-dark {
+            background: rgba(139, 101, 8, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 40px 0 rgba(139, 101, 8, 0.4), inset 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        /* Shapes */
+        .shape-arch { border-radius: 50% 50% 0 0 / 30% 30% 0 0; }
+        .shape-arch-full { border-radius: 100rem 100rem 0 0; }
+        .shape-diamond { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+        .shape-hexagon { clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+        .shape-triangle-up { clip-path: polygon(50% 0, 0 100%, 100% 100%); }
+        .shape-triangle-down { clip-path: polygon(0 0, 100% 0, 50% 100%); }
+
+        /* Animations */
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+        @keyframes sway { 0%, 100% { transform: translateX(-20px); } 50% { transform: translateX(20px); } }
+        @keyframes fall {
+            0% { transform: translateY(-5vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 0.8; transform: translateY(0vh) rotate(45deg) scale(1); }
+            90% { opacity: 0.8; transform: translateY(100vh) rotate(315deg) scale(1); }
+            100% { transform: translateY(105vh) rotate(360deg) scale(0.5); opacity: 0; }
+        }
+        @keyframes pulse-soft { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 15px rgba(212,175,55,0.6)); } }
+        @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes zoomBg { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+        
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        .animate-zoom-bg { animation: zoomBg 25s ease-in-out infinite alternate; }
+
+        /* 2-Way Scroll Animations */
+        .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur {
+            opacity: 0; transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        /* Entrance from Bottom (Default) */
+        .reveal { transform: translateY(80px); }
+        .reveal-left { transform: translateX(-80px) rotate(-5deg); }
+        .reveal-right { transform: translateX(80px) rotate(5deg); }
+        .reveal-scale { transform: scale(0.85); }
+        .reveal-blur { transform: translateY(40px) scale(0.95); filter: blur(15px); }
+
+        /* Active State (Visible in Viewport) */
+        .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0) rotate(0deg); }
+        .reveal-scale.active { opacity: 1; transform: scale(1); }
+        .reveal-blur.active { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+
+        /* Exit to Top (Scrolling Down) */
+        .reveal.exit-up { transform: translateY(-80px); }
+        .reveal-left.exit-up { transform: translateX(-80px) rotate(-5deg); }
+        .reveal-right.exit-up { transform: translateX(80px) rotate(5deg); }
+        .reveal-scale.exit-up { transform: scale(1.1); }
+        .reveal-blur.exit-up { transform: translateY(-40px) scale(1.1); filter: blur(15px); }
+
+        /* 3D Utilities */
+        .perspective-container { perspective: 1500px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .pop-out { transform: translateZ(40px) !important; }
+        .pop-out-lg { transform: translateZ(80px) !important; }
+        .tilt-card { transition: transform 0.3s ease-out; }
+
+
+        .particle-container { position: absolute; animation: sway 5s ease-in-out infinite; z-index: 0; pointer-events: none; }
+        .particle {
+            width: 10px; height: 10px;
+            background-color: #FFD700;
+            border-radius: 2px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px #D4AF37;
+            animation: fall linear infinite;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        
+        .timeline-line::before {
+            content: ''; position: absolute; left: 24px; top: 0; bottom: 0;
+            width: 2px; background: rgba(212, 175, 55, 0.5);
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center w-full min-h-screen text-dark font-sans selection:bg-primary selection:text-white">
+
+    <!-- MOBILE APP WRAPPER -->
+    <div id="app-wrapper" class="w-full max-w-[430px] relative h-[100dvh] overflow-y-auto overflow-x-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] border-x border-gray-800 bg-light perspective-container">
+        
+        <!-- FIXED GLASSMORPHISM BACKGROUND -->
+        <div class="absolute inset-0 z-0">
+            <img id="img-latar-utama" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-50 hue-rotate-[45deg]">
+            <div class="absolute inset-0 bg-gradient-to-br from-secondary/80 to-primary/40"></div>
+        </div>
+
+        <audio id="bgm" loop>
+            <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_51a37cce14.mp3?filename=wedding-piano-108709.mp3" type="audio/mpeg">
+        </audio>
+        <button id="audio-btn" class="absolute bottom-6 right-4 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.5)] z-50 hidden hover:scale-110 transition-transform">
+            <i class="fas fa-music text-sm"></i>
+        </button>
+
+        <!-- ==================== COVER SECTION ==================== -->
+        <div id="cover" class="fixed inset-0 z-[100] h-[100dvh] pointer-events-none perspective-container preserve-3d">
+            <!-- Background Layer -->
+            <div id="cover-top" class="absolute inset-0 bg-white pointer-events-auto overflow-hidden origin-bottom">
+                <div class="absolute -top-[20%] -left-[20%] w-[80vw] h-[80vw] bg-primary/40 rounded-full blur-[80px] animate-spin-slow"></div>
+                <div class="absolute -bottom-[20%] -right-[20%] w-[80vw] h-[80vw] bg-accent/50 rounded-full blur-[80px] animate-spin-slow" style="animation-direction: reverse;"></div>
+                
+                <div class="absolute inset-0 overflow-hidden">
+                    <img id="cover-img" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60 animate-zoom-bg hue-rotate-[45deg]">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent"></div>
+            </div>
+            
+            <!-- Cover Content Layer -->
+            <div id="cover-content" class="absolute inset-0 flex flex-col items-center justify-center text-white px-6 pointer-events-auto">
+                <div class="animate-float w-full text-center">
+                    <div class="text-[10px] tracking-[0.4em] uppercase mb-5 text-accent font-semibold">Undangan Pernikahan</div>
+                    
+                    <h1 class="font-script text-6xl mb-4 text-white drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">
+                        Abel<br><span class="text-primary text-4xl leading-[0.5]">&amp;</span><br>Suci
+                    </h1>
+                    
+                    <p class="font-serif italic text-base mb-12 text-white/90 max-w-[250px] mx-auto leading-relaxed drop-shadow-md">
+                        "Terciptalah sebuah kisah dari doa yang terucap, menyatukan dua hati dalam satu ikatan suci."
+                    </p>
+                    
+                    <div class="glass-panel p-5 rounded-2xl mb-8 mx-auto w-[85%] transform hover:scale-105 transition-transform duration-500">
+                        <p class="text-[11px] text-dark/70 font-bold mb-2 uppercase tracking-widest">Kepada Yth.</p>
+                        <div class="text-lg font-serif font-bold text-dark mb-1">Tamu Undangan Spesial</div>
+                        <p class="text-[10px] text-dark/60 italic font-bold">Bapak/Ibu/Saudara/i</p>
+                    </div>
+
+                    <button onclick="openInvitation()" class="group relative px-8 py-4 bg-primary text-white text-xs tracking-widest uppercase font-bold rounded-full overflow-hidden transition-all shadow-[0_0_20px_rgba(212,175,55,0.6)] hover:shadow-[0_0_30px_rgba(212,175,55,0.8)]">
+                        <span class="relative z-10 flex items-center gap-2">
+                            <i class="fas fa-envelope-open-text group-hover:scale-125 transition-transform duration-500"></i> Buka Undangan
+                        </span>
+                        <div class="absolute inset-0 bg-white/30 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MAIN CONTENT ==================== -->
+        <main id="main-content" class="opacity-0 transition-opacity duration-1000 relative z-10">
+            
+            <!-- Particles -->
+            <div id="particles-container" class="absolute top-0 left-0 w-full h-[5000px]"></div>
+
+            <!-- 1. Hero Section -->
+            <section class="relative min-h-[100dvh] flex flex-col items-center justify-center pt-20 pb-10 overflow-hidden z-10">
+                <div class="container px-6 relative z-10 text-center flex flex-col items-center justify-center h-full w-full">
+                    
+                    <p class="font-serif text-primary font-bold text-[10px] tracking-widest uppercase mb-4 reveal-blur">The Wedding Of</p>
+
+                    <div class="relative w-[260px] h-[360px] mb-8 reveal-scale mx-auto preserve-3d tilt-card group">
+                        <!-- Outer Glowing Frame -->
+                        <div class="absolute -inset-1.5 rounded-[2rem] border border-accent/60 bg-accent/10 blur-[2px] shadow-[0_0_40px_rgba(255,215,0,0.5)] animate-pulse-soft"></div>
+                        <!-- Inner Glass Image -->
+                        <div class="w-full h-full overflow-hidden rounded-[2rem] border-[3px] border-white/90 shadow-[0_15px_40px_rgba(139,101,8,0.6)] relative z-10 bg-white/30 backdrop-blur-md p-1.5">
+                            <div class="w-full h-full rounded-[1.5rem] overflow-hidden">
+                                <img id="img-hero-prewedding" src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Prewedding" class="w-full h-full object-cover animate-zoom-bg">
+                            </div>
+                        </div>
+                        <!-- Floating Diamond Decor -->
+                        <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 w-10 h-10 rotate-45 bg-gradient-to-tr from-accent to-primary border-2 border-white shadow-[0_0_20px_rgba(255,215,0,0.9)] z-20 flex items-center justify-center">
+                            <div class="w-3 h-3 border border-white/70"></div>
+                        </div>
+                    </div>
+                    
+                    <h2 class="font-script text-[4.5rem] leading-none text-white font-bold mb-6 reveal-blur drop-shadow-[0_4px_15px_rgba(139,101,8,0.5)] relative z-10">
+                        <span class="text-accent drop-shadow-[0_0_15px_rgba(255,215,0,0.8)]">A</span>bel <span class="text-4xl text-primary mx-1 drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]">&amp;</span> <span class="text-accent drop-shadow-[0_0_15px_rgba(255,215,0,0.8)]">S</span>uci
+                    </h2>
+                    
+                    <div class="reveal-blur delay-100 mb-8 mt-2 flex justify-center gap-4 w-full max-w-sm mx-auto perspective-container">
+                        <div class="glass-panel-dark py-4 px-2 rounded-2xl w-1/2 flex flex-col justify-center border-t border-accent shadow-[0_10px_25px_rgba(139,101,8,0.4)] relative overflow-hidden group hover:border-white transition-all transform hover:scale-105">
+                            <div class="absolute -right-4 -top-4 w-12 h-12 bg-accent/20 rotate-45 blur-md group-hover:bg-accent/40 transition-colors"></div>
+                            <p class="font-serif text-accent text-[10px] font-bold uppercase tracking-widest mb-1 drop-shadow-sm">Akad Nikah</p>
+                            <p class="font-serif text-white text-[15px] font-bold mb-0.5">12 Des 2026</p>
+                            <p class="text-[9px] text-white/70 font-bold uppercase tracking-wider">08:00 - 10:00</p>
+                        </div>
+                        <div class="glass-panel-dark py-4 px-2 rounded-2xl w-1/2 flex flex-col justify-center border-t border-accent shadow-[0_10px_25px_rgba(139,101,8,0.4)] relative overflow-hidden group hover:border-white transition-all transform hover:scale-105">
+                            <div class="absolute -left-4 -top-4 w-12 h-12 bg-primary/20 rotate-45 blur-md group-hover:bg-primary/40 transition-colors"></div>
+                            <p class="font-serif text-accent text-[10px] font-bold uppercase tracking-widest mb-1 drop-shadow-sm">Resepsi</p>
+                            <p class="font-serif text-white text-[15px] font-bold mb-0.5">12 Des 2026</p>
+                            <p class="text-[9px] text-white/70 font-bold uppercase tracking-wider">11:00 - Selesai</p>
+                        </div>
+                    </div>
+
+                    <a href="https://calendar.google.com/calendar/r/eventedit" target="_blank" class="reveal-scale delay-200 relative z-10 inline-flex items-center px-8 py-3.5 bg-gradient-to-r from-primary to-accent text-white rounded-full text-xs uppercase tracking-widest font-bold shadow-[0_0_25px_rgba(255,215,0,0.6)] hover:-translate-y-1 hover:shadow-[0_0_35px_rgba(255,215,0,0.8)] transition-all">
+                        <i class="far fa-calendar-alt mr-2 text-lg"></i> Save the Date
+                    </a>
+                </div>
+            </section>
+
+            <!-- 1.5. Ayat Al-Quran -->
+            <section class="flex flex-col justify-center py-6 relative z-10 overflow-hidden">
+                <div class="px-6 text-center">
+                    <div class="relative reveal-blur glass-panel p-6 rounded-3xl max-w-sm mx-auto">
+                        <i class="fas fa-quote-left absolute top-3 left-4 text-xl text-primary/30"></i>
+                        <p class="font-serif text-[14px] text-dark/90 leading-relaxed italic relative z-10 px-2">
+                            "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri..."
+                        </p>
+                        <div class="w-10 h-[2px] bg-primary/50 mx-auto my-3 rounded-full"></div>
+                        <p class="text-[10px] font-bold tracking-widest text-primary uppercase">(QS. Ar-Rum: 21)</p>
+                        <i class="fas fa-quote-right absolute bottom-3 right-4 text-xl text-primary/30"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Kata Sambutan & Video -->
+            <section class="flex flex-col justify-center py-12 relative z-10 overflow-hidden">
+                <div class="px-6 text-center">
+                    <div class="reveal-blur mb-8 glass-panel p-8 rounded-[2rem]">
+                        <p class="text-[10px] text-primary font-bold tracking-widest uppercase mb-2">Bismillahirahmanirrahim</p>
+                        <h3 class="font-script text-5xl text-dark mb-6">Assalamu'alaikum<br>Wr. Wb.</h3>
+                        <p class="font-serif text-dark/80 text-[15px] leading-relaxed mb-4">
+                            Maha suci Allah SWT yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan memohon rahmat dan ridho-Nya, serta tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara pernikahan putra-putri kami.
+                        </p>
+                        <p class="font-serif text-dark/80 text-[15px] leading-relaxed italic font-bold">
+                            Kehadiran Anda adalah hadiah terindah, dan doa Anda adalah anugerah terbesar bagi langkah baru kami.
+                        </p>
+                    </div>
+                    
+                    <!-- Video Container -->
+                    <div class="w-full aspect-video rounded-3xl overflow-hidden border-4 border-white/80 shadow-2xl reveal-scale relative mx-auto bg-dark/10">
+                        <iframe 
+                            class="absolute top-0 left-0 w-full h-full" 
+                            src="https://www.youtube.com/embed/ScMzIvxBSi4?origin=https://www.youtube.com&widget_referrer=https://www.youtube.com" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Mempelai Section -->
+            <section class="flex flex-col justify-center py-12 relative z-10 overflow-hidden">
+                <div class="px-5 relative z-10 w-full">
+                    <div class="text-center mb-6 reveal">
+                        <h3 class="font-script text-4xl text-dark mb-1">Sang Mempelai</h3>
+                        <p class="font-serif text-primary font-bold text-[10px] tracking-widest uppercase">Dua Jiwa yang Dipersatukan</p>
+                        <div class="w-12 h-[2px] bg-primary mx-auto mt-2 rounded-full"></div>
+                    </div>
+
+                    <div class="flex flex-col items-center gap-6 glass-panel w-full p-6 py-10 rounded-[3rem] reveal-scale shadow-xl preserve-3d tilt-card relative">
+                        
+                        <!-- Themed Card Background -->
+                        <div class="absolute inset-0 z-0 pointer-events-none rounded-[3rem] overflow-hidden">
+                            <img id="img-bg-mempelai" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Floral Background" class="w-full h-full object-cover opacity-40 hue-rotate-[45deg]">
+                            <!-- Gradient Overlay for readability -->
+                            <div class="absolute inset-0 bg-gradient-to-br from-white/70 via-white/40 to-white/80"></div>
+                            <!-- Soft Watercolor Mesh -->
+                            <div class="absolute -top-[10%] -left-[10%] w-[60%] h-[50%] bg-primary/20 rounded-full blur-[30px]"></div>
+                            <div class="absolute -bottom-[10%] -right-[10%] w-[60%] h-[50%] bg-secondary/20 rounded-full blur-[30px]"></div>
+                        </div>
+
+                        <!-- Groom -->
+                        <div class="flex flex-col items-center text-center w-full pop-out-lg relative z-10">
+                            <div class="w-40 h-52 rounded-[4rem] overflow-hidden mb-4 shadow-lg relative border-2 border-white/90 group">
+                                <div class="w-full h-full relative">
+                                    <img id="img-profil-pria" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Groom" class="w-full h-full object-cover animate-zoom-bg">
+                                </div>
+                                <a href="#" class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/60 backdrop-blur-md border border-white/80 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:scale-110 transition-all shadow-sm opacity-80 group-hover:opacity-100"><i class="fab fa-instagram text-sm"></i></a>
+                            </div>
+                            <h4 class="font-serif text-3xl font-bold text-dark mb-2">Abel Eka Putra</h4>
+                            <p class="text-dark/70 font-serif text-xs leading-relaxed mb-1">Putra Pertama dari<br><span class="font-bold text-dark text-[13px]">Bpk. Montague & Ibu Lady Montague</span></p>
+                        </div>
+
+                        <!-- Ampersand -->
+                        <div class="relative flex flex-col items-center my-1 pop-out z-10">
+                            <div class="absolute inset-0 bg-white/60 rounded-full blur-md scale-150"></div>
+                            <span class="font-script text-6xl text-primary drop-shadow-md relative z-20 leading-none">&amp;</span>
+                        </div>
+
+                        <!-- Bride -->
+                        <div class="flex flex-col items-center text-center w-full pop-out-lg relative z-10">
+                            <div class="w-40 h-52 rounded-[4rem] overflow-hidden mb-4 shadow-lg relative border-2 border-white/90 group">
+                                <div class="w-full h-full relative">
+                                    <img id="img-profil-wanita" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bride" class="w-full h-full object-cover animate-zoom-bg">
+                                </div>
+                                <a href="#" class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/60 backdrop-blur-md border border-white/80 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:scale-110 transition-all shadow-sm opacity-80 group-hover:opacity-100"><i class="fab fa-instagram text-sm"></i></a>
+                            </div>
+                            <h4 class="font-serif text-3xl font-bold text-dark mb-2">Suci Zalsabila Rahim</h4>
+                            <p class="text-dark/70 font-serif text-xs leading-relaxed mb-1">Putri Bungsu dari<br><span class="font-bold text-dark text-[13px]">Bpk. Capulet & Ibu Lady Capulet</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3.5 Biodata Section -->
+            <section class="flex flex-col justify-center py-8 relative z-10 overflow-hidden">
+                <div class="px-5 relative z-10 w-full">
+                    <div class="text-center mb-8 reveal-blur">
+                        <h3 class="font-script text-5xl text-dark mb-1">Profil Lengkap</h3>
+                        <p class="font-serif text-primary font-bold text-[10px] tracking-widest uppercase">Mengenal Lebih Dekat</p>
+                        <div class="w-12 h-[2px] bg-primary mx-auto mt-2 rounded-full"></div>
+                    </div>
+
+                    <!-- Groom Biodata -->
+                    <div class="glass-panel w-full p-6 rounded-[2rem] reveal-left shadow-lg mb-6 relative overflow-hidden">
+                        <!-- Card Background -->
+                        <div class="absolute inset-0 z-0 pointer-events-none">
+                            <!-- Premium CSS Glassmorphism Mesh -->
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10"></div>
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/15 to-transparent rounded-bl-full"></div>
+                            <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary/15 to-transparent rounded-tr-full"></div>
+                            <div class="absolute inset-0 bg-white/40 backdrop-blur-[10px]"></div>
+                        </div>
+
+                        <div class="relative z-10">
+                            <h4 class="font-serif text-2xl font-bold text-dark border-b border-primary/30 pb-3 mb-4">Abel Eka Putra</h4>
+                            <ul class="space-y-3 font-serif text-[13px] text-dark/80">
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-calendar-alt text-primary mt-1 w-4 text-center"></i>
+                                    <span>14 Februari 1998</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-map-marker-alt text-primary mt-1 w-4 text-center"></i>
+                                    <span>Jl. Verona Indah No. 123, Jakarta Selatan</span>
+                                </li>
+                                <li class="flex items-center gap-5 mt-2 pt-3 border-t border-primary/10">
+                                    <a href="#" class="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors shadow-sm"><i class="fab fa-instagram text-lg"></i></a>
+                                    <a href="#" class="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors shadow-sm"><i class="fab fa-tiktok text-lg"></i></a>
+                                    <a href="#" class="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors shadow-sm"><i class="fab fa-twitter text-lg"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Bride Biodata -->
+                    <div class="glass-panel w-full p-6 rounded-[2rem] reveal-right shadow-lg relative overflow-hidden">
+                        <!-- Card Background -->
+                        <div class="absolute inset-0 z-0 pointer-events-none">
+                            <!-- Premium CSS Glassmorphism Mesh -->
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10"></div>
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/15 to-transparent rounded-bl-full"></div>
+                            <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary/15 to-transparent rounded-tr-full"></div>
+                            <div class="absolute inset-0 bg-white/40 backdrop-blur-[10px]"></div>
+                        </div>
+
+                        <div class="relative z-10">
+                            <h4 class="font-serif text-2xl font-bold text-dark border-b border-primary/30 pb-3 mb-4 text-right">Suci Zalsabila Rahim</h4>
+                            <ul class="space-y-3 font-serif text-[13px] text-dark/80 text-right">
+                                <li class="flex items-start justify-end gap-3">
+                                    <span>24 Agustus 1999</span>
+                                    <i class="fas fa-calendar-alt text-primary mt-1 w-4 text-center"></i>
+                                </li>
+                                <li class="flex items-start justify-end gap-3">
+                                    <span>Jl. Mawar Merah No. 45, Jakarta Pusat</span>
+                                    <i class="fas fa-map-marker-alt text-primary mt-1 w-4 text-center"></i>
+                                </li>
+                                <li class="flex items-center justify-end gap-5 mt-2 pt-3 border-t border-primary/10">
+                                    <a href="#" class="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors shadow-sm"><i class="fab fa-twitter text-lg"></i></a>
+                                    <a href="#" class="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors shadow-sm"><i class="fab fa-tiktok text-lg"></i></a>
+                                    <a href="#" class="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors shadow-sm"><i class="fab fa-instagram text-lg"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Love Story -->
+            <section class="flex flex-col justify-center py-12 relative z-10">
+                <div class="px-6">
+                    <div class="text-center mb-10 reveal-blur">
+                        <h3 class="font-script text-6xl text-dark mb-2 drop-shadow-sm">Kisah Asmara</h3>
+                        <p class="font-serif text-primary font-bold text-xs tracking-widest uppercase">Perjalanan Cinta Kami</p>
+                    </div>
+
+                    <div class="relative timeline-line pl-12 pr-2">
+                        <!-- Item 1 -->
+                        <div class="mb-10 relative reveal-left">
+                            <div class="absolute -left-[48px] top-1 w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white text-sm shadow-lg z-10 border-2 border-white transform hover:scale-110 transition-transform">
+                                <i class="fas fa-coffee"></i>
+                            </div>
+                            <div class="glass-panel p-5 rounded-2xl relative">
+                                <div class="absolute w-4 h-4 glass-panel transform rotate-45 -left-2 top-4 border-r-0 border-t-0"></div>
+                                <h4 class="font-bold text-xl text-dark font-serif mb-1">Pertama Bertemu</h4>
+                                <p class="text-primary font-bold text-xs mb-3 tracking-wider uppercase drop-shadow-sm">14 Februari 2020</p>
+                                <div class="w-full h-36 shape-arch overflow-hidden mb-4 shadow-inner">
+                                    <img src="https://images.unsplash.com/photo-1499744632587-7798360ba20f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                                </div>
+                                <p class="text-dark/80 font-medium text-[13px] leading-relaxed">Berawal dari kebetulan yang manis di sebuah kedai kopi kecil saat hujan turun. Segelas kopi hangat dan satu pandangan pertama yang mengubah seluruh alur cerita hidup kami.</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="mb-10 relative reveal-left delay-100">
+                            <div class="absolute -left-[48px] top-1 w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary text-sm shadow-lg z-10 border-2 border-primary transform hover:scale-110 transition-transform">
+                                <i class="fas fa-camera-retro"></i>
+                            </div>
+                            <div class="glass-panel p-5 rounded-2xl relative">
+                                <div class="absolute w-4 h-4 glass-panel transform rotate-45 -left-2 top-4 border-r-0 border-t-0"></div>
+                                <h4 class="font-bold text-xl text-dark font-serif mb-1">Merajut Memori</h4>
+                                <p class="text-primary font-bold text-xs mb-3 tracking-wider uppercase drop-shadow-sm">2021 - 2024</p>
+                                <p class="text-dark/80 font-medium text-[13px] leading-relaxed mb-4">Hari demi hari terlewati, canda, tawa, dan terkadang air mata mendewasakan hubungan ini. Kami belajar bahwa cinta bukan hanya tentang menatap satu sama lain, melainkan menatap ke arah tujuan yang sama.</p>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="h-20 rounded-tl-xl rounded-bl-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover"></div>
+                                    <div class="h-20 rounded-tr-xl rounded-br-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="mb-4 relative reveal-left delay-200">
+                            <div class="absolute -left-[48px] top-1 w-10 h-10 rounded-full bg-dark border-2 border-primary flex items-center justify-center text-white text-sm shadow-lg z-10 transform hover:scale-110 transition-transform">
+                                <i class="fas fa-ring"></i>
+                            </div>
+                            <div class="glass-panel-dark p-5 rounded-2xl relative text-white">
+                                <div class="absolute w-4 h-4 glass-panel-dark transform rotate-45 -left-2 top-4 border-r-0 border-t-0"></div>
+                                <h4 class="font-bold text-xl text-white font-serif mb-1">Mengikat Janji</h4>
+                                <p class="text-primary font-bold text-xs mb-3 tracking-wider uppercase drop-shadow-sm">20 Agustus 2025</p>
+                                <div class="w-full h-40 shape-diamond overflow-hidden mb-4 shadow-inner p-1 bg-white/20">
+                                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full shape-diamond object-cover hover:scale-125 transition-transform duration-1000">
+                                </div>
+                                <p class="text-white/90 text-[13px] leading-relaxed">Sebuah pertanyaan sederhana "Maukah kau menemaniku seumur hidup?" yang dijawab dengan tetesan air mata bahagia. Hari dimana kedua keluarga besar bertemu dan kami mengikat janji suci pertunangan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Event Details -->
+            <section class="flex flex-col justify-center py-12 relative z-10">
+                <div class="px-5 relative z-10">
+                    <div class="text-center mb-10 reveal-blur glass-panel p-8 rounded-[3rem] relative overflow-hidden">
+                        <!-- Card Background -->
+                        <div class="absolute inset-0 z-0 pointer-events-none">
+    <!-- Premium CSS Glassmorphism Mesh (No Image Required) -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10"></div>
+    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/15 to-transparent rounded-bl-full"></div>
+    <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary/15 to-transparent rounded-tr-full"></div>
+    <div class="absolute inset-0 bg-white/40 backdrop-blur-[10px]"></div>
+</div>
+                        
+                        <div class="relative z-10">
+                            <h3 class="font-script text-6xl text-dark mb-2">Hari Bahagia</h3>
+                            <p class="font-serif text-primary font-bold tracking-widest uppercase text-xs">Momen Suci yang Dinantikan</p>
+                            <div class="w-10 h-[2px] mx-auto bg-primary mt-4 rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-6">
+                        <!-- Akad -->
+                        <div class="glass-panel-dark text-white p-8 shape-arch text-center border-[3px] border-accent/40 reveal-scale shadow-[0_15px_40px_rgba(139,101,8,0.5)] relative overflow-hidden group">
+                            <!-- Background Image -->
+                            <div class="absolute inset-0 z-0 pointer-events-none">
+    <!-- Premium CSS Glassmorphism Mesh (No Image Required) -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20"></div>
+    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/30 to-transparent rounded-bl-full"></div>
+    <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary/30 to-transparent rounded-tr-full"></div>
+    <div class="absolute inset-0 bg-white/20 backdrop-blur-[15px]"></div>
+</div>
+                            
+                            <!-- Inner glowing ring arch -->
+                            <div class="absolute inset-4 rounded-t-full rounded-b-xl border border-accent/30 pointer-events-none group-hover:border-accent/60 transition-colors"></div>
+                            
+                            <div class="w-20 h-20 mx-auto bg-gradient-to-tr from-primary to-accent rounded-full flex items-center justify-center mb-6 border-4 border-white/80 relative z-10 shadow-[0_0_20px_rgba(255,215,0,0.6)]">
+                                <i class="fas fa-ring text-3xl text-white drop-shadow-md"></i>
+                            </div>
+                            <h4 class="font-script text-[4rem] leading-none mb-6 text-white relative z-10 drop-shadow-[0_2px_10px_rgba(139,101,8,0.5)]">Akad Nikah</h4>
+                            <div class="mb-6 bg-dark/40 backdrop-blur-md py-4 rounded-xl border border-white/20 relative z-10">
+                                <p class="text-[13px] text-primary font-bold tracking-widest uppercase mb-1 drop-shadow-sm">Minggu</p>
+                                <p class="text-3xl text-white font-serif font-bold mb-1">12 Desember 2026</p>
+                                <p class="text-white/80 font-sans text-[11px] uppercase tracking-wider font-bold">Pukul 08:00 - 10:00 WIB</p>
+                            </div>
+                            <div class="mb-8 relative z-10">
+                                <p class="font-bold text-white text-lg mb-1 font-serif">Masjid Agung Verona</p>
+                                <p class="text-[11px] text-white/80 leading-relaxed font-bold">Jl. Cinta Abadi No. 1<br>Kota Verona, Italia</p>
+                            </div>
+                            <a href="#" class="relative z-10 inline-flex items-center px-8 py-3 bg-white text-dark rounded-full text-xs uppercase tracking-widest font-bold shadow-xl hover:-translate-y-1 hover:bg-primary hover:text-white transition-all">
+                                <i class="fas fa-map-marker-alt mr-2 text-lg"></i> Google Maps
+                            </a>
+                        </div>
+
+                        <!-- Resepsi -->
+                        <div class="glass-panel-dark text-white p-8 shape-arch text-center border-[3px] border-primary/40 reveal-scale delay-200 shadow-[0_15px_40px_rgba(139,101,8,0.5)] relative overflow-hidden group">
+                            <!-- Background Image -->
+                            <div class="absolute inset-0 z-0 pointer-events-none">
+    <!-- Premium CSS Glassmorphism Mesh (No Image Required) -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20"></div>
+    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/30 to-transparent rounded-bl-full"></div>
+    <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary/30 to-transparent rounded-tr-full"></div>
+    <div class="absolute inset-0 bg-white/20 backdrop-blur-[15px]"></div>
+</div>
+                            
+                            <!-- Inner glowing ring arch -->
+                            <div class="absolute inset-4 rounded-t-full rounded-b-xl border border-primary/30 pointer-events-none group-hover:border-primary/60 transition-colors"></div>
+                            
+                            <div class="w-20 h-20 mx-auto bg-gradient-to-tr from-accent to-primary rounded-full flex items-center justify-center mb-6 border-4 border-white/80 relative z-10 shadow-[0_0_20px_rgba(212,175,55,0.6)]">
+                                <i class="fas fa-glass-cheers text-3xl text-white drop-shadow-md"></i>
+                            </div>
+                            <h4 class="font-script text-[4rem] leading-none mb-6 text-white relative z-10 drop-shadow-[0_2px_10px_rgba(139,101,8,0.5)]">Resepsi</h4>
+                            <div class="mb-6 bg-dark/40 backdrop-blur-md py-4 rounded-xl border border-white/20 relative z-10">
+                                <p class="text-[13px] text-primary font-bold tracking-widest uppercase mb-1 drop-shadow-sm">Minggu</p>
+                                <p class="text-3xl text-white font-serif font-bold mb-1">12 Desember 2026</p>
+                                <p class="text-white/80 font-sans text-[11px] uppercase tracking-wider font-bold">Pukul 11:00 - Selesai</p>
+                            </div>
+                            <div class="mb-8 relative z-10">
+                                <p class="font-bold text-white text-lg mb-1 font-serif">Verona Grand Hall</p>
+                                <p class="text-[11px] text-white/80 leading-relaxed font-bold">Jl. Romansa No. 99<br>Kota Verona, Italia</p>
+                            </div>
+                            <a href="#" class="relative z-10 inline-flex items-center px-8 py-3 bg-white text-dark rounded-full text-xs uppercase tracking-widest font-bold shadow-xl hover:-translate-y-1 hover:bg-primary hover:text-white transition-all">
+                                <i class="fas fa-map-marker-alt mr-2 text-lg"></i> Google Maps
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Countdown -->
+                    <div class="mt-12 text-center reveal-blur glass-panel-dark p-8 rounded-[2rem] shadow-2xl relative overflow-hidden">
+                        <!-- Background -->
+                        <div class="absolute inset-0 z-0 pointer-events-none">
+    <!-- Premium CSS Glassmorphism Mesh (No Image Required) -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10"></div>
+    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/15 to-transparent rounded-bl-full"></div>
+    <div class="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-primary/15 to-transparent rounded-tr-full"></div>
+    <div class="absolute inset-0 bg-white/40 backdrop-blur-[10px]"></div>
+</div>
+
+                        <h4 class="font-script text-5xl mb-8 text-white relative z-10">Menghitung Waktu</h4>
+                        <div class="flex justify-center gap-3 relative z-10">
+                            <div class="flex flex-col items-center group">
+                                <div class="w-16 h-16 bg-white/20 backdrop-blur-md shape-hexagon flex items-center justify-center text-white text-2xl font-bold border-2 border-white/50 shadow-lg group-hover:bg-primary transition-colors">
+                                    <span id="days">00</span>
+                                </div>
+                                <span class="text-[10px] uppercase tracking-widest mt-3 text-white font-bold drop-shadow-sm">Hari</span>
+                            </div>
+                            <div class="flex flex-col items-center group">
+                                <div class="w-16 h-16 bg-white/20 backdrop-blur-md shape-hexagon flex items-center justify-center text-white text-2xl font-bold border-2 border-white/50 shadow-lg group-hover:bg-primary transition-colors">
+                                    <span id="hours">00</span>
+                                </div>
+                                <span class="text-[10px] uppercase tracking-widest mt-3 text-white font-bold drop-shadow-sm">Jam</span>
+                            </div>
+                            <div class="flex flex-col items-center group">
+                                <div class="w-16 h-16 bg-white/20 backdrop-blur-md shape-hexagon flex items-center justify-center text-white text-2xl font-bold border-2 border-white/50 shadow-lg group-hover:bg-primary transition-colors">
+                                    <span id="minutes">00</span>
+                                </div>
+                                <span class="text-[10px] uppercase tracking-widest mt-3 text-white font-bold drop-shadow-sm">Menit</span>
+                            </div>
+                            <div class="flex flex-col items-center group">
+                                <div class="w-16 h-16 bg-white/20 backdrop-blur-md shape-hexagon flex items-center justify-center text-white text-2xl font-bold border-2 border-white/50 shadow-lg group-hover:bg-primary transition-colors">
+                                    <span id="seconds">00</span>
+                                </div>
+                                <span class="text-[10px] uppercase tracking-widest mt-3 text-white font-bold drop-shadow-sm">Detik</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Gallery -->
+            <section class="flex flex-col justify-center py-12 z-10 relative">
+                <div class="px-5">
+                    <div class="text-center mb-10 reveal-blur glass-panel p-6 rounded-[2rem]">
+                        <h3 class="font-script text-5xl text-dark mb-2">Galeri Cinta</h3>
+                        <p class="font-serif text-primary font-bold text-xs tracking-widest uppercase">Momen Kebahagiaan Kami</p>
+                    </div>
+
+                    <div class="columns-2 gap-3 glass-panel p-4 rounded-[2rem]">
+                        <!-- Photo 1 -->
+                        <div class="break-inside-avoid mb-3 overflow-hidden rounded-xl reveal-scale shadow-md relative group">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" alt="Gallery">
+                        </div>
+                        
+                        <!-- Photo 2 -->
+                        <div class="break-inside-avoid mb-3 overflow-hidden rounded-xl reveal-scale shadow-md relative group">
+                            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" alt="Gallery">
+                        </div>
+                        
+                        <!-- Photo 3 -->
+                        <div class="break-inside-avoid mb-3 overflow-hidden rounded-xl reveal-scale shadow-md relative group">
+                            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" alt="Gallery">
+                        </div>
+                        
+                        <!-- Photo 4 -->
+                        <div class="break-inside-avoid mb-3 overflow-hidden rounded-xl reveal-scale shadow-md relative group">
+                            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" alt="Gallery">
+                        </div>
+                        
+                        <!-- Photo 5 -->
+                        <div class="break-inside-avoid mb-3 overflow-hidden rounded-xl reveal-scale shadow-md relative group">
+                            <img src="https://images.unsplash.com/photo-1543269664-76bc3997d9ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" alt="Gallery">
+                        </div>
+                        
+                        <!-- Photo 6 -->
+                        <div class="break-inside-avoid mb-3 overflow-hidden rounded-xl reveal-scale shadow-md relative group">
+                            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" alt="Gallery">
+                        </div>
+                        
+                        <!-- Photo 7 -->
+                        <div class="break-inside-avoid mb-3 overflow-hidden rounded-xl reveal-scale shadow-md relative group">
+                            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" alt="Gallery">
+                        </div>
+                        
+                        <!-- Photo 8 -->
+                        <div class="break-inside-avoid mb-3 overflow-hidden rounded-xl reveal-scale shadow-md relative group">
+                            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" alt="Gallery">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Live Streaming -->
+            <section class="min-h-[100dvh] flex flex-col justify-center py-24 relative z-10 overflow-hidden">
+                <div class="px-6 relative z-10 text-center">
+                    <div class="reveal-blur mb-10 glass-panel p-8 rounded-[3rem]">
+                        <div class="w-16 h-16 mx-auto bg-primary/20 rounded-full flex items-center justify-center mb-6 text-primary shadow-[0_0_15px_rgba(212,175,55,0.4)] border border-primary/30">
+                            <i class="fas fa-video text-2xl animate-pulse"></i>
+                        </div>
+                        <h3 class="font-script text-5xl text-dark mb-3">Live Streaming</h3>
+                        <p class="font-serif text-primary font-bold text-xs tracking-wide uppercase mb-4">Saksikan Secara Virtual</p>
+                        <p class="text-[13px] text-dark/80 font-medium leading-relaxed font-serif max-w-[300px] mx-auto">Kami menyadari bahwa jarak dan waktu dapat memisahkan kita. Oleh karena itu, bagi keluarga dan sahabat yang tidak dapat hadir secara langsung, kami menyediakan siaran virtual agar tetap dapat menyaksikan momen bahagia kami.</p>
+                    </div>
+
+                    <div class="glass-panel-dark text-white p-8 rounded-3xl reveal-scale shadow-2xl mx-auto max-w-[320px] transform hover:scale-105 transition-transform duration-500">
+                        <i class="fab fa-youtube text-5xl text-red-500 drop-shadow-md mb-4"></i>
+                        <h4 class="font-bold text-white text-xl mb-1 font-serif">YouTube Live</h4>
+                        <p class="text-xs text-primary font-bold tracking-widest uppercase mb-6 drop-shadow-sm">Akad & Resepsi</p>
+                        
+                        <a href="#" class="inline-flex justify-center items-center gap-2 w-full px-6 py-4 bg-white text-dark rounded-xl text-xs uppercase font-bold shadow-xl hover:bg-primary hover:text-white transition-all">
+                            Gabung Siaran Langsung <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. Gift -->
+            <section class="min-h-[100dvh] flex flex-col justify-center py-20 relative">
+                <div class="px-5 text-center relative z-10">
+                    <div class="reveal-blur mb-10 glass-panel p-8 rounded-[3rem]">
+                        <div class="w-16 h-16 mx-auto bg-primary/20 rounded-full flex items-center justify-center mb-5 text-primary shadow-inner border border-primary/30">
+                            <i class="fas fa-heart text-3xl animate-pulse-soft"></i>
+                        </div>
+                        <h3 class="font-script text-5xl text-dark mb-4">Tanda Kasih</h3>
+                        <p class="font-serif text-dark/80 font-medium mb-2 text-sm leading-relaxed max-w-[320px] mx-auto">Kehadiran dan doa restu Anda merupakan hadiah terindah. Namun, jika Anda hendak memberikan tanda kasih, Anda dapat mengirimkannya melalui opsi di bawah ini:</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-[2rem] shadow-xl reveal-scale relative text-left border-[3px] border-white/60 flex flex-col gap-6">
+                        <!-- Transfer Bank -->
+                        <div>
+                            <div class="flex items-center gap-4 mb-4 relative z-10">
+                                <div class="w-12 h-12 rounded-full bg-white/60 backdrop-blur-md flex items-center justify-center text-primary shadow-sm border border-white">
+                                    <i class="fas fa-university text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-[10px] font-bold text-dark/60 tracking-widest uppercase">Transfer Bank</h4>
+                                    <p class="font-bold text-dark text-sm">Bank Central Asia (BCA)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="relative z-10">
+                                <div class="bg-white/70 p-4 rounded-2xl border border-white flex justify-between items-center shadow-inner">
+                                    <div>
+                                        <p class="text-xl font-bold tracking-widest text-primary font-sans">1234567890</p>
+                                        <p class="text-dark/70 font-serif text-[11px] mt-1 font-bold">a.n. Abel Eka Putra</p>
+                                    </div>
+                                    <button onclick="copyText('1234567890', 'copy-toast-1')" class="shrink-0 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-dark transition-colors shadow-md">
+                                        <i class="far fa-copy text-sm"></i>
+                                    </button>
+                                </div>
+                                <div id="copy-toast-1" class="text-[10px] font-bold text-green-700 text-center opacity-0 transition-opacity mt-2 h-0">
+                                    <i class="fas fa-check-circle"></i> No. Rekening berhasil disalin!
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="border-white/50 border-t-2">
+
+                        <!-- Kirim Kado Fisik -->
+                        <div>
+                            <div class="flex items-center gap-4 mb-4 relative z-10">
+                                <div class="w-12 h-12 rounded-full bg-white/60 backdrop-blur-md flex items-center justify-center text-primary shadow-sm border border-white">
+                                    <i class="fas fa-box-open text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-[10px] font-bold text-dark/60 tracking-widest uppercase">Kirim Kado</h4>
+                                    <p class="font-bold text-dark text-sm">Alamat Mempelai</p>
+                                </div>
+                            </div>
+                            
+                            <div class="relative z-10">
+                                <div class="bg-white/70 p-4 rounded-2xl border border-white shadow-inner relative flex justify-between items-center">
+                                    <div class="pr-4">
+                                        <p class="text-sm font-bold text-dark mb-1">Abel Eka Putra</p>
+                                        <p class="text-xs text-primary font-bold mb-2">0812-3456-7890</p>
+                                        <p class="text-dark/70 font-serif text-[13px] leading-relaxed font-medium">Perumahan Cinta Abadi Blok A1 No. 99, RT 01/RW 02, Kec. Romansa, Kota Verona.</p>
+                                    </div>
+                                    <button onclick="copyText('Perumahan Cinta Abadi Blok A1 No. 99, RT 01/RW 02, Kec. Romansa, Kota Verona', 'copy-toast-2')" class="shrink-0 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-dark transition-colors shadow-md">
+                                        <i class="far fa-copy text-sm"></i>
+                                    </button>
+                                </div>
+                                <div id="copy-toast-2" class="text-[10px] font-bold text-green-700 text-center opacity-0 transition-opacity mt-2 h-0">
+                                    <i class="fas fa-check-circle"></i> Alamat berhasil disalin!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. RSVP & Wishes -->
+            <section class="min-h-[100dvh] flex flex-col justify-center py-24 relative">
+                <div class="px-5">
+                    <!-- RSVP Form -->
+                    <div class="reveal-scale glass-panel-dark p-8 rounded-3xl shadow-2xl mb-16 relative">
+                        <h3 class="font-script text-6xl text-white mb-2 relative z-10">Kehadiran</h3>
+                        <p class="font-serif text-primary font-bold mb-8 text-xs uppercase tracking-wider relative z-10 drop-shadow-sm">Konfirmasi Kehadiran Anda</p>
+                        
+                        <form class="space-y-5 relative z-10">
+                            <div>
+                                <input type="text" placeholder="Tuliskan Nama Lengkap Anda..." class="w-full bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl px-5 py-4 text-sm text-white placeholder-white/70 focus:outline-none focus:border-white shadow-inner">
+                            </div>
+                            <div>
+                                <select class="w-full bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-white appearance-none shadow-inner">
+                                    <option value="" disabled selected class="text-dark">Pilih Status Kehadiran...</option>
+                                    <option value="hadir" class="text-dark">✅ Ya, Saya akan hadir</option>
+                                    <option value="tidak" class="text-dark">❌ Maaf, saya tidak bisa hadir</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select class="w-full bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-white appearance-none shadow-inner">
+                                    <option value="" disabled selected class="text-dark">Pilih Jumlah Tamu yang Hadir...</option>
+                                    <option value="1" class="text-dark">1 Orang</option>
+                                    <option value="2" class="text-dark">2 Orang</option>
+                                </select>
+                            </div>
+                            <button type="button" class="w-full bg-white text-dark hover:bg-primary hover:text-white font-bold py-4 px-4 rounded-xl text-xs uppercase tracking-widest shadow-xl mt-4 transition-all">
+                                Kirim Konfirmasi <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Guestbook -->
+                    <div class="reveal-blur glass-panel p-8 rounded-[3rem]">
+                        <div class="text-center mb-8">
+                            <h3 class="font-script text-6xl text-dark mb-2">Buku Tamu</h3>
+                            <p class="font-serif text-primary font-bold text-xs uppercase tracking-wider">Tinggalkan Pesan & Doa</p>
+                        </div>
+                        
+                        <form class="space-y-4 mb-8 bg-white/40 p-6 rounded-2xl border border-white shadow-lg">
+                            <input type="text" placeholder="Nama Anda..." class="w-full bg-white/60 border border-white rounded-xl px-4 py-3 text-sm text-dark placeholder-dark/50 focus:outline-none focus:border-primary shadow-inner">
+                            <textarea rows="3" placeholder="Tulis ucapan, harapan, dan doa untuk kami..." class="w-full bg-white/60 border border-white rounded-xl px-4 py-3 text-sm text-dark placeholder-dark/50 focus:outline-none focus:border-primary resize-none shadow-inner"></textarea>
+                            <button type="button" class="w-full px-4 py-3 bg-primary text-white font-bold rounded-xl text-xs uppercase tracking-widest hover:bg-dark transition-colors shadow-md">
+                                Kirim Ucapan
+                            </button>
+                        </form>
+
+                        <div class="h-[300px] overflow-y-auto pr-2 space-y-4 custom-scrollbar">
+                            <div class="bg-white/60 backdrop-blur-md p-5 rounded-2xl border-l-4 border-primary shadow-md">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h5 class="font-bold text-dark text-sm">Keluarga Bpk. Budi</h5>
+                                    <span class="text-[9px] text-dark/50 font-bold"><i class="far fa-clock"></i> Baru saja</span>
+                                </div>
+                                <p class="text-[13px] text-dark/80 font-serif leading-relaxed font-medium">Selamat menempuh hidup baru Abel & Suci! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Cepat dapat momongan ya!</p>
+                            </div>
+                            <div class="bg-white/60 backdrop-blur-md p-5 rounded-2xl border-l-4 border-primary shadow-md">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h5 class="font-bold text-dark text-sm">Sarah Bestie</h5>
+                                    <span class="text-[9px] text-dark/50 font-bold"><i class="far fa-clock"></i> 2 Jam lalu</span>
+                                </div>
+                                <p class="text-[13px] text-dark/80 font-serif leading-relaxed font-medium">Aaaaa akhirnya pecah telur juga! Lancar sampai hari H yaa bestieee! Cant wait to see you in that gorgeous dress!</p>
+                            </div>
+                            <div class="bg-white/60 backdrop-blur-md p-5 rounded-2xl border-l-4 border-primary shadow-md">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h5 class="font-bold text-dark text-sm">Andi Saputra</h5>
+                                    <span class="text-[9px] text-dark/50 font-bold"><i class="far fa-clock"></i> 1 Hari lalu</span>
+                                </div>
+                                <p class="text-[13px] text-dark/80 font-serif leading-relaxed font-medium">Happy wedding bro! Doa terbaik buat kalian berdua, langgeng sampai maut memisahkan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. Footer -->
+            <footer class="pt-24 pb-12 text-center border-t-[3px] border-white/50 relative overflow-hidden bg-white/20 backdrop-blur-xl">
+                <div class="px-6 reveal-scale relative z-10">
+                    <div class="w-20 h-20 mx-auto mb-8 bg-primary/80 backdrop-blur-md shape-diamond flex items-center justify-center border-[3px] border-white shadow-lg">
+                        <span class="font-script text-3xl text-white">R<span class="text-sm mx-[2px]">&amp;</span>J</span>
+                    </div>
+                    
+                    <p class="font-serif text-dark/80 font-bold mb-4 text-[13px] leading-relaxed italic">"Tiada yang dapat kami ungkapkan selain rasa syukur dan terima kasih yang mendalam, atas kehadiran serta doa restu Bapak/Ibu/Saudara/i sekalian."</p>
+                    <p class="font-bold text-dark mb-10 tracking-widest uppercase text-sm">Terima Kasih</p>
+                    
+                    <h2 class="font-script text-6xl text-primary mb-8 drop-shadow-sm">Abel & Suci</h2>
+                    
+                    <div class="flex justify-center gap-4 mb-10">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md text-primary flex items-center justify-center text-sm shadow-md hover:bg-primary hover:text-white transition-colors hover:-translate-y-1"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md text-primary flex items-center justify-center text-sm shadow-md hover:bg-primary hover:text-white transition-colors hover:-translate-y-1"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md text-primary flex items-center justify-center text-sm shadow-md hover:bg-primary hover:text-white transition-colors hover:-translate-y-1"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="relative z-10 pt-8 border-t border-white/40 text-[10px] text-dark/60 font-sans mx-8 font-bold">
+                    <p class="uppercase tracking-widest mb-1">&copy; 2026 Digital Invitation</p>
+                    <p>Created with <i class="fas fa-heart text-primary mx-1 animate-pulse"></i> for your special day.</p>
+                </div>
+            </footer>
+        </main>
+    </div> <!-- END APP WRAPPER -->
+
+    <!-- Scripts -->
+    <script>
+        const appWrapper = document.getElementById('app-wrapper');
+        const setHeight = () => {
+            const vh = window.innerHeight;
+            appWrapper.style.minHeight = `${vh}px`;
+        };
+        window.addEventListener('resize', setHeight);
+        setHeight();
+
+        const scrollContainer = document.getElementById('main-content');
+        const audioBtn = document.getElementById('audio-btn');
+        const audio = document.getElementById('bgm');
+        window.isPlaying = false;
+
+        function openInvitation() {
+            document.body.classList.add('wrapper-opened');
+            appWrapper.scrollTo(0, 0);
+
+            
+            // GSAP Cinematic Opening
+            const tl = gsap.timeline();
+            
+            // 1. Content flies up and scales
+            tl.to("#cover-content", { y: -100, scale: 1.2, opacity: 0, duration: 1.2, ease: "power3.in" })
+            // 2. The background image zooms in massively (like diving into the photo)
+              .to("#cover-img", { scale: 3, opacity: 0, duration: 1.5, ease: "power2.inOut" }, "-=0.8")
+            // 3. The whole cover lifts off like a curtain or just fades
+              .to("#cover-top", { opacity: 0, duration: 1, ease: "power2.inOut" }, "-=1")
+              .set("#cover", { display: "none" });
+              
+            setTimeout(() => {
+                const mainContent = document.getElementById('main-content');
+                mainContent.classList.remove('opacity-0');
+                
+                audio.play().catch(e => console.log("Audio play failed:", e));
+                window.isPlaying = true;
+                audioBtn.classList.remove('hidden');
+                
+                createParticles();
+                handleScroll();
+            }, 1000);
+            
+            setTimeout(handleScroll, 1500);
+        }
+
+        audioBtn.addEventListener('click', () => {
+            if (window.isPlaying) {
+                audio.pause();
+                audioBtn.innerHTML = '<i class="fas fa-volume-mute text-white/50 text-sm"></i>';
+                audioBtn.classList.add('bg-dark/50');
+                audioBtn.classList.remove('bg-primary');
+            } else {
+                audio.play();
+                audioBtn.innerHTML = '<i class="fas fa-music text-sm"></i>';
+                audioBtn.classList.remove('bg-dark/50');
+                audioBtn.classList.add('bg-primary');
+            }
+            window.isPlaying = !window.isPlaying;
+        });
+
+        function handleScroll() {
+            const tiltCards = document.querySelectorAll('.tilt-card');
+            const windowHeight = window.innerHeight;
+            
+            // 3D Parallax Tilt Effect
+            tiltCards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardCenterY = rect.top + (rect.height / 2);
+                const distFromCenter = cardCenterY - (windowHeight / 2);
+                
+                let rotateX = -(distFromCenter / windowHeight) * 30;
+                if (rotateX > 15) rotateX = 15;
+                if (rotateX < -15) rotateX = -15;
+                
+                card.style.transform = `scale(1) rotateX(${rotateX}deg)`;
+            });
+        }
+        appWrapper.addEventListener('scroll', handleScroll);
+
+        // Native Intersection Observer for Bulletproof 2-Way Scroll Animations
+        const animatedElements = document.querySelectorAll('.reveal, .reveal-scale, .reveal-blur, .reveal-left, .reveal-right');
+        
+        const observerOptions = {
+            root: appWrapper,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    entry.target.classList.remove('exit-up');
+                } else {
+                    entry.target.classList.remove('active');
+                    // Check if element exited through the top of the viewport
+                    if (entry.boundingClientRect.y < 0) {
+                        entry.target.classList.add('exit-up');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        animatedElements.forEach(el => observer.observe(el));
+
+        const countDownDate = new Date("Dec 12, 2026 08:00:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+            
+            if (distance < 0) return;
+            
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+
+        function copyText(textToCopy, toastId) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const toast = document.getElementById(toastId);
+                toast.classList.remove("opacity-0");
+                toast.classList.add("-translate-y-6");
+                setTimeout(() => {
+                    toast.classList.add("opacity-0");
+                    toast.classList.remove("-translate-y-6");
+                }, 2500);
+            });
+        }
+
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            if (container.children.length > 0) return;
+            
+            const swayWrapper = document.createElement('div');
+            swayWrapper.className = 'particle-container w-full h-full';
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle absolute';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                swayWrapper.appendChild(particle);
+            }
+            container.appendChild(swayWrapper);
+        }
+    </script>
+
+    <!-- KONFIGURASI FOTO KLIEN -->
+    <script>
+        // ==========================================
+        // PENGATURAN FOTO (Ubah link di bawah ini)
+        // ==========================================
+        const CONFIG_FOTO = {
+            latarUtama: "gambar/sampul_utama.png",
+            sampulDepan: "gambar/sampul_depan.png",
+            heroPrewedding: "gambar/hero_preweding.png",
+            profilPria: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
+            profilWanita: "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+        };
+
+        // Otomatis menerapkan foto saat halaman dimuat (dieksekusi langsung)
+        const applyFoto = () => {
+            const elLatarUtama = document.getElementById('img-latar-utama');
+            const elSampulDepan = document.getElementById('cover-img'); 
+            const elHero = document.getElementById('img-hero-prewedding');
+            const elProfilPria = document.getElementById('img-profil-pria');
+            const elProfilWanita = document.getElementById('img-profil-wanita');
+            const elBgMempelai = document.getElementById('img-bg-mempelai');
+
+            if (elLatarUtama) elLatarUtama.src = CONFIG_FOTO.latarUtama;
+            if (elSampulDepan) elSampulDepan.src = CONFIG_FOTO.sampulDepan;
+            if (elHero) elHero.src = CONFIG_FOTO.heroPrewedding;
+            if (elProfilPria) elProfilPria.src = CONFIG_FOTO.profilPria;
+            if (elProfilWanita) elProfilWanita.src = CONFIG_FOTO.profilWanita;
+            
+            // Latar belakang seksi Mempelai menggunakan gambar yang sama dengan Sampul
+            if (elBgMempelai) elBgMempelai.src = CONFIG_FOTO.sampulDepan;
+        };
+        
+        // Eksekusi langsung jika DOM sudah siap
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", applyFoto);
+        } else {
+            applyFoto();
+        }
+    </script>
+</body>
+</html>

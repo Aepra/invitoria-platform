@@ -1,0 +1,93 @@
+export const weddingData = {
+  bride: {
+    name: 'Suci Zalsabila Rahim',
+    nickname: 'Suci',
+    father: 'Bpk. Capulet',
+    mother: 'Ibu Lady Capulet',
+    birthdate: '24 Agustus 1999',
+    address: 'Jl. Mawar Merah No. 45, Jakarta Pusat',
+    phone: '0812-3456-7890',
+    photo: 'https://images.pexels.com/photos/38383885/pexels-photo-38383885.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    socials: { instagram: '#', tiktok: '#', twitter: '#' },
+  },
+  groom: {
+    name: 'Abel Eka Putra',
+    nickname: 'Abel',
+    father: 'Bpk. Montague',
+    mother: 'Ibu Lady Montague',
+    birthdate: '14 Februari 1998',
+    address: 'Jl. Verona Indah No. 123, Jakarta Selatan',
+    phone: '0812-3456-7890',
+    photo: 'https://images.pexels.com/photos/5028403/pexels-photo-5028403.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    socials: { instagram: '#', tiktok: '#', twitter: '#' },
+  },
+  heroPhoto: 'https://images.pexels.com/photos/27742046/pexels-photo-27742046.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  coverPhoto: 'https://images.pexels.com/photos/17892611/pexels-photo-17892611.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  bgPhoto: 'https://images.pexels.com/photos/37478879/pexels-photo-37478879.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  events: {
+    akad: {
+      title: 'Akad Nikah',
+      day: 'Minggu',
+      date: '12 Desember 2026',
+      time: '08:00 - 10:00 WIB',
+      venue: 'Masjid Agung Verona',
+      address: 'Jl. Cinta Abadi No. 1, Kota Verona',
+      mapsUrl: '#',
+    },
+    resepsi: {
+      title: 'Resepsi',
+      day: 'Minggu',
+      date: '12 Desember 2026',
+      time: '11:00 - Selesai',
+      venue: 'Verona Grand Hall',
+      address: 'Jl. Romansa No. 99, Kota Verona',
+      mapsUrl: '#',
+    },
+  },
+  countdownDate: 'Dec 12, 2026 08:00:00',
+  loveStory: [
+    {
+      title: 'Pertama Bertemu',
+      date: '14 Februari 2020',
+      icon: 'coffee',
+      description:
+        'Berawal dari kebetulan yang manis di sebuah kedai kopi kecil saat hujan turun. Segelas kopi hangat dan satu pandangan pertama yang mengubah seluruh alur cerita hidup kami.',
+      photo: 'https://images.pexels.com/photos/679568/pexels-photo-679568.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    },
+    {
+      title: 'Merajut Memori',
+      date: '2021 - 2024',
+      icon: 'camera',
+      description:
+        'Hari demi hari terlewati, canda, tawa, dan terkadang air mata mendewasakan hubungan ini. Kami belajar bahwa cinta bukan hanya tentang menatap satu sama lain, melainkan menatap ke arah tujuan yang sama.',
+      photo: 'https://images.pexels.com/photos/34689160/pexels-photo-34689160.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    },
+    {
+      title: 'Mengikat Janji',
+      date: '20 Agustus 2025',
+      icon: 'ring',
+      description:
+        'Sebuah pertanyaan sederhana "Maukah kau menemaniku seumur hidup?" yang dijawab dengan tetesan air mata bahagia. Hari dimana kedua keluarga besar bertemu dan kami mengikat janji suci pertunangan.',
+      photo: 'https://images.pexels.com/photos/5544665/pexels-photo-5544665.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    },
+  ],
+  gallery: [
+    'https://images.pexels.com/photos/27742046/pexels-photo-27742046.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    'https://images.pexels.com/photos/8687075/pexels-photo-8687075.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    'https://images.pexels.com/photos/679568/pexels-photo-679568.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    'https://images.pexels.com/photos/5544665/pexels-photo-5544665.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    'https://images.pexels.com/photos/34689160/pexels-photo-34689160.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    'https://images.pexels.com/photos/36666819/pexels-photo-36666819.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    'https://images.pexels.com/photos/10792781/pexels-photo-10792781.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    'https://images.pexels.com/photos/8687018/pexels-photo-8687018.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    'https://images.pexels.com/photos/5984220/pexels-photo-5984220.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+  ],
+  gift: {
+    bank: 'Bank Central Asia (BCA)',
+    accountNumber: '1234567890',
+    accountName: 'Abel Eka Putra',
+    address: 'Perumahan Cinta Abadi Blok A1 No. 99, RT 01/RW 02, Kec. Romansa, Kota Verona',
+  },
+};
+
+export type WeddingData = typeof weddingData;
