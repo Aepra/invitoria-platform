@@ -74,7 +74,13 @@ export function Guestbook() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-royal-900 via-royal-800 to-royal-900 py-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
+      <div 
+        className="absolute inset-0 bg-fixed bg-center bg-cover" 
+        style={{ backgroundImage: "url('/demo/royal_lovestory_bg.png')", filter: "blur(3px)" }} 
+      />
+      <div className="absolute inset-0 bg-royal-950/80 pointer-events-none" />
+
       <Particles count={12} />
 
       <div className="relative z-10 w-full max-w-2xl px-6">

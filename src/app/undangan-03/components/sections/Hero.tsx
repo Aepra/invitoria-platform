@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import { weddingData } from '../../data/wedding';
 
 const heroBgImages = [
-  weddingData.bgPhoto,
-  weddingData.heroPhoto,
-  weddingData.coverPhoto,
-  weddingData.gallery[0],
-  weddingData.gallery[2],
+  'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2',
+  'https://images.pexels.com/photos/1024984/pexels-photo-1024984.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2',
+  'https://images.pexels.com/photos/3379934/pexels-photo-3379934.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2',
+  'https://images.pexels.com/photos/1405963/pexels-photo-1405963.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2'
 ];
 
 export function Hero() {

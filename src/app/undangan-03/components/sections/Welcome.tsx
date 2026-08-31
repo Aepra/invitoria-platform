@@ -15,22 +15,22 @@ export function Welcome() {
         </div>
 
         <div className="reveal">
-          <p className="text-gold-300 text-sm tracking-[0.3em] uppercase font-sans mb-4">
+          <p className="text-gold-300 text-xs tracking-[0.3em] uppercase font-sans mb-3">
             Assalamu&apos;alaikum Wr. Wb.
           </p>
 
-          <h2 className="font-script text-5xl sm:text-6xl text-gold-gradient mb-6">
+          <h2 className="font-script text-4xl sm:text-5xl text-gold-gradient mb-5">
             Welcome
           </h2>
 
-          <p className="text-ivory/80 font-serif text-lg sm:text-xl leading-relaxed mb-4">
+          <p className="text-ivory/80 font-serif text-base leading-relaxed mb-4">
             Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud
             menyelenggarakan upacara pernikahan putra-putri kami. Tanpa mengurangi
             rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir
             pada acara pernikahan kami.
           </p>
 
-          <p className="text-ivory/60 font-serif text-base italic">
+          <p className="text-ivory/60 font-serif text-sm italic">
             Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
             Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada
             kedua mempelai.

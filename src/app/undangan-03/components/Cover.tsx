@@ -23,53 +23,41 @@ export function Cover({ onOpen }: { onOpen: () => void }) {
       {/* Background */}
       <div className="absolute inset-0">
         <img
-          src={weddingData.coverPhoto}
+          src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           alt="Royal wedding"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-top"
           style={{ animation: 'zoomBg 25s ease-in-out infinite alternate' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-royal-900/70 via-royal-800/80 to-royal-900/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-royal-900/40 via-royal-900/70 to-royal-900/95" />
       </div>
 
-      <Particles count={15} />
-
-      {/* Corner ornaments */}
-      <CornerOrnament className="absolute top-6 left-6 w-16 h-16 opacity-70" />
-      <CornerOrnament className="absolute top-6 right-6 w-16 h-16 opacity-70" flip />
-      <CornerOrnament className="absolute bottom-6 left-6 w-16 h-16 opacity-70" />
-      <CornerOrnament className="absolute bottom-6 right-6 w-16 h-16 opacity-70" flip />
+      <Particles count={10} />
 
       {/* Content */}
-      <div className="relative h-full flex flex-col items-center justify-center px-4 sm:px-6 text-center">
+      <div className="relative h-full flex flex-col items-center justify-end px-4 sm:px-6 text-center pb-16 md:pb-24">
         <div
-          className="flex flex-col items-center p-8 sm:p-12 rounded-3xl glass-panel-dark mx-auto max-w-2xl border-gold-gradient"
+          className="flex flex-col items-center p-6 mx-auto max-w-lg"
           style={{
             animation: 'fadeIn 2s ease-out forwards',
-            background: 'rgba(2, 12, 28, 0.45)',
-            backdropFilter: 'blur(8px)',
           }}
         >
-          <p className="text-ivory/90 text-sm md:text-base tracking-[0.4em] uppercase font-cinzel mb-8 drop-shadow-md">
-            The Royal Wedding Of
+          <p className="text-ivory/80 text-xs md:text-sm tracking-[0.3em] uppercase font-cinzel mb-6 drop-shadow-md">
+            The Wedding Of
           </p>
 
-          <RoyalCrown className="w-20 h-12 mb-4 animate-float" />
-
-          <h1 className="font-script text-6xl sm:text-7xl md:text-8xl text-shimmer-gold leading-tight mb-2">
+          <h1 className="font-script text-6xl sm:text-7xl md:text-8xl text-shimmer-gold leading-tight">
             Suci
           </h1>
-          <div className="flex items-center gap-4 my-4">
-            <span className="h-px w-16 bg-gradient-to-r from-transparent to-gold-400/80" />
-            <FleurDeLisOrnament className="w-8 h-10 text-gold-300 drop-shadow-md" />
-            <span className="text-gold-300 font-serif text-4xl italic">&</span>
-            <FleurDeLisOrnament className="w-8 h-10 text-gold-300 drop-shadow-md" />
-            <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold-400/80" />
+          
+          <div className="flex items-center justify-center my-1">
+            <span className="text-gold-300/80 font-serif text-3xl italic">&</span>
           </div>
+          
           <h1 className="font-script text-6xl sm:text-7xl md:text-8xl text-shimmer-gold leading-tight">
             Abel
           </h1>
 
-          <p className="text-ivory/90 font-serif text-xl md:text-2xl italic mt-8 mb-10 drop-shadow-md">
+          <p className="text-ivory/90 font-serif text-lg md:text-xl mt-8 mb-10 drop-shadow-md">
             Minggu, 12 Desember 2026
           </p>
 

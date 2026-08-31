@@ -156,13 +156,13 @@ export function EventDetails() {
       {sectionBgImages.map((src, i) => (
         <div
           key={i}
-          className={`absolute inset-0 bg-fixed bg-center bg-cover animate-float-bg transition-opacity duration-[2000ms] ${
+          className={`absolute inset-0 bg-fixed bg-center bg-cover transition-opacity duration-[2000ms] ${
             i === bgIndex ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ backgroundImage: `url('${src}')`, filter: 'blur(4px)' }}
+          style={{ backgroundImage: `url('${src}')`, filter: 'blur(3px)' }}
         />
       ))}
-      <div className="absolute inset-0 bg-royal-950/85 pointer-events-none" />
+      <div className="absolute inset-0 bg-royal-950/80 pointer-events-none" />
 
       {/* Decorative corner overlays */}
       <div className="absolute top-0 left-0 w-40 h-40 pointer-events-none z-[1]">

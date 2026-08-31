@@ -5,6 +5,7 @@ import { Particles } from '../../components/Particles';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export function Gallery() {
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
   const images = weddingData.gallery;
 
@@ -13,40 +14,55 @@ export function Gallery() {
   const prev = () => setLightbox((p) => (p === null ? null : (p - 1 + images.length) % images.length));
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-royal-900 via-royal-800 to-royal-900 py-20">
+    <section className="relative flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-royal-900 via-royal-800 to-royal-900 py-10">
       <Particles count={12} />
 
-      <div className="relative z-10 w-full max-w-4xl px-6">
-        <div className="text-center mb-12">
+      <div className="relative z-10 w-full max-w-5xl px-6">
+        <div className="text-center mb-8">
           <div className="reveal-scale mb-4">
             <OrnamentDivider />
           </div>
-          <h2 className="reveal font-script text-5xl sm:text-6xl text-gold-gradient">
+          <h2 className="reveal font-script text-4xl sm:text-5xl text-gold-gradient">
             Gallery
           </h2>
-          <p className="reveal text-ivory/60 font-serif text-lg italic mt-4">
+          <p className="reveal text-ivory/60 font-serif text-base italic mt-2">
             Momen-momen indah kami
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          {images.map((src, i) => {
-            const span = i === 0 || i === 5 ? 'col-span-2 row-span-2' : '';
-            return (
-              <div
-                key={i}
-                className={`reveal-scale ${span} relative overflow-hidden rounded-xl border border-gold-400/20 group cursor-pointer`}
-                onClick={() => setLightbox(i)}
-              >
-                <img
-                  src={src}
-                  alt={`Gallery ${i + 1}`}
-                  className="w-full h-full min-h-[120px] object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-royal-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-            );
-          })}
+        {/* Main Large Image */}
+        <div 
+          className="reveal-scale relative w-fit max-w-full mx-auto mb-6 cursor-pointer group"
+          onClick={() => setLightbox(selectedImageIndex)}
+        >
+          <img
+            src={images[selectedImageIndex]}
+            alt="Gallery Main"
+            className="max-h-[75vh] w-auto max-w-full object-contain rounded-3xl shadow-2xl border border-gold-400/30 transition-transform duration-700 group-hover:scale-[1.02]"
+          />
+          {/* subtle overlay on hover */}
+          <div className="absolute inset-0 bg-black/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <span className="text-white text-sm tracking-widest font-sans uppercase drop-shadow-md">Lihat Penuh</span>
+          </div>
+        </div>
+
+        {/* Thumbnails Row */}
+        <div className="reveal-blur flex gap-3 overflow-x-auto snap-x hide-scrollbar pb-4 pt-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          {images.map((src, i) => (
+            <button
+              key={i}
+              onClick={() => setSelectedImageIndex(i)}
+              className={`relative shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden border-2 transition-all snap-center ${
+                i === selectedImageIndex ? 'border-gold-400 scale-105 shadow-[0_0_10px_rgba(201,162,39,0.5)]' : 'border-transparent opacity-60 hover:opacity-100'
+              }`}
+            >
+              <img
+                src={src}
+                alt={`Thumbnail ${i + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </button>
+          ))}
         </div>
       </div>
 
