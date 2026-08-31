@@ -26,7 +26,7 @@ export function useScrollReveal(scrollRef: React.RefObject<HTMLElement>) {
           }
         });
       },
-      { root, rootMargin: '0px', threshold: 0.15 }
+      { root: null, rootMargin: '0px', threshold: 0.1 }
     );
 
     elements.forEach((el) => observer.observe(el));
