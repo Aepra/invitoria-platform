@@ -45,9 +45,10 @@ export default {
         parchment: '#EFE4D2',
       },
       fontFamily: {
-        serif: ['"Cormorant Garamond"', 'serif'],
+        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'serif'],
         script: ['"Great Vibes"', 'cursive'],
         sans: ['Montserrat', 'sans-serif'],
+        cinzel: ['Cinzel', 'serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

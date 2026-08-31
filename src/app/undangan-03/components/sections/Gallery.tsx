@@ -29,9 +29,9 @@ export function Gallery() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 gap-3">
           {images.map((src, i) => {
-            const span = i === 0 || i === 5 ? 'sm:col-span-2 sm:row-span-2' : '';
+            const span = i === 0 || i === 5 ? 'col-span-2 row-span-2' : '';
             return (
               <div
                 key={i}

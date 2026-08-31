@@ -40,15 +40,17 @@ export function Cover({ onOpen }: { onOpen: () => void }) {
       <CornerOrnament className="absolute bottom-6 right-6 w-16 h-16 opacity-70" flip />
 
       {/* Content */}
-      <div className="relative h-full flex flex-col items-center justify-center px-6 text-center">
+      <div className="relative h-full flex flex-col items-center justify-center px-4 sm:px-6 text-center">
         <div
-          className="flex flex-col items-center"
+          className="flex flex-col items-center p-8 sm:p-12 rounded-3xl glass-panel-dark mx-auto max-w-2xl border-gold-gradient"
           style={{
             animation: 'fadeIn 2s ease-out forwards',
+            background: 'rgba(2, 12, 28, 0.45)',
+            backdropFilter: 'blur(8px)',
           }}
         >
-          <p className="text-ivory/80 text-sm tracking-[0.3em] uppercase font-sans mb-6">
-            The Wedding Of
+          <p className="text-ivory/90 text-sm md:text-base tracking-[0.4em] uppercase font-cinzel mb-8 drop-shadow-md">
+            The Royal Wedding Of
           </p>
 
           <RoyalCrown className="w-20 h-12 mb-4 animate-float" />
@@ -56,18 +58,18 @@ export function Cover({ onOpen }: { onOpen: () => void }) {
           <h1 className="font-script text-6xl sm:text-7xl md:text-8xl text-shimmer-gold leading-tight mb-2">
             Suci
           </h1>
-          <div className="flex items-center gap-4 my-2">
-            <span className="h-px w-12 bg-gold-400/60" />
-            <FleurDeLisOrnament className="w-6 h-8" />
-            <span className="text-gold-300 font-serif text-3xl italic">&</span>
-            <FleurDeLisOrnament className="w-6 h-8" />
-            <span className="h-px w-12 bg-gold-400/60" />
+          <div className="flex items-center gap-4 my-4">
+            <span className="h-px w-16 bg-gradient-to-r from-transparent to-gold-400/80" />
+            <FleurDeLisOrnament className="w-8 h-10 text-gold-300 drop-shadow-md" />
+            <span className="text-gold-300 font-serif text-4xl italic">&</span>
+            <FleurDeLisOrnament className="w-8 h-10 text-gold-300 drop-shadow-md" />
+            <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold-400/80" />
           </div>
           <h1 className="font-script text-6xl sm:text-7xl md:text-8xl text-shimmer-gold leading-tight">
             Abel
           </h1>
 
-          <p className="text-ivory/70 font-serif text-lg italic mt-6 mb-10">
+          <p className="text-ivory/90 font-serif text-xl md:text-2xl italic mt-8 mb-10 drop-shadow-md">
             Minggu, 12 Desember 2026
           </p>
 

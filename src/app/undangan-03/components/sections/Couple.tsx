@@ -81,7 +81,7 @@ function PersonCard({
 
 export function Couple() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-royal-900 via-royal-800 to-royal-900 py-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-royal-900 via-royal-800 to-royal-900 py-20 rounded-t-[2.5rem] -mt-4 z-10">
       <Particles count={15} />
 
       <div className="relative z-10 w-full max-w-4xl px-6">
@@ -97,7 +97,7 @@ export function Couple() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-16 md:gap-8 items-center">
+        <div className="grid gap-16 items-center">
           <PersonCard person={weddingData.bride} label="The Bride" revealClass="reveal-left" />
           <PersonCard person={weddingData.groom} label="The Groom" revealClass="reveal-right" />
         </div>
@@ -152,7 +152,7 @@ export function Biodata() {
           <h2 className="reveal font-script text-5xl text-gold-gradient">Biodata</h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid gap-6">
           <BiodataCard person={weddingData.bride} label="The Bride" revealClass="reveal-left" />
           <BiodataCard person={weddingData.groom} label="The Groom" revealClass="reveal-right" />
         </div>
