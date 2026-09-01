@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Parisienne&family=Jost:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss";
+@config "./tailwind.config.js";
+
+@layer base {
+  .theme-wrapper {
+    background-color: #FAF6EC;
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .app-scroll {
+    height: 100dvh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  .app-scroll::-webkit-scrollbar {
+    width: 5px;
+  }
+  .app-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .app-scroll::-webkit-scrollbar-thumb {
+    background: #93BD9F;
+    border-radius: 10px;
+  }
+
+  /* Frame */
+  .paper-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(147, 189, 159, 0.35);
+    box-shadow: 0 18px 40px -22px rgba(49, 87, 65, 0.35);
+  }
+
+  /* Botanical arch divider */
+  .bloom-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  .bloom-divider::before,
+  .bloom-divider::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    max-width: 72px;
+    background: linear-gradient(90deg, transparent, #93BD9F);
+  }
+  .bloom-divider::after {
+    background: linear-gradient(90deg, #93BD9F, transparent);
+  }
+
+  /* Monogram ring */
+  .monogram {
+    writing-mode: vertical-rl;
+  }
+
+  /* Scroll reveal — different set of movement than p5 */
+  .rise,
+  .pop,
+  .swing,
+  .fade,
+  .drop,
+  .zoom,
+  .flip,
+  .bloom {
+    opacity: 0;
+    transition: opacity 1s cubic-bezier(.22, 1, .36, 1),
+                transform 1s cubic-bezier(.22, 1, .36, 1),
+                filter 1s cubic-bezier(.22, 1, .36, 1);
+    will-change: opacity, transform;
+  }
+  .rise { transform: translateY(52px); }
+  .pop  { transform: scale(.84) rotate(-1.5deg); }
+  .swing { transform: translateX(-64px) rotate(2deg); }
+  .fade  { transform: translateY(24px); filter: blur(6px); }
+  .drop  { transform: translateY(-56px) scale(.96); }
+  .zoom  { transform: scale(.72); filter: blur(10px); }
+  .flip  { transform: perspective(900px) rotateX(38deg) translateY(30px); transform-origin: top center; }
+  .bloom { transform: scale(.5) rotate(-14deg); }
+
+  .rise.entered,
+  .pop.entered,
+  .swing.entered,
+  .fade.entered,
+  .drop.entered,
+  .zoom.entered,
+  .flip.entered,
+  .bloom.entered {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+
+  .rise.leaving,
+  .fade.leaving {
+    opacity: 0;
+    transform: translateY(-52px);
+  }
+  .pop.leaving { opacity: 0; transform: scale(0.92); }
+  .swing.leaving { opacity: 0; transform: translateX(64px) rotate(-2deg); }
+  .drop.leaving { opacity: 0; transform: translateY(-40px); }
+  .zoom.leaving { opacity: 0; transform: scale(.9); filter: blur(4px); }
+  .flip.leaving { opacity: 0; transform: perspective(900px) rotateX(-24deg); }
+  .bloom.leaving { opacity: 0; transform: scale(.7) rotate(10deg); }
+
+  /* Botanical frame with clip-path arch */
+  .arch-frame {
+    clip-path: ellipse(72% 100% at 50% 100%);
+  }
+  .arch-shape {
+    clip-path: ellipse(100% 78% at 50% 40%);
+  }
+
+  /* Masonry */
+  .masonry {
+    column-count: 2;
+    column-gap: 0.9rem;
+  }
+  .masonry > * {
+    break-inside: avoid;
+  }
+
+  /* Rounded letter/leaf accent */
+  .leaf-dot {
+    background: radial-gradient(circle at 30% 30%, #BBD5C2, #4C8864);
+    border-radius: 62% 38% 55% 45% / 55% 48% 52% 45%;
+  }
+
+  /* Fade-in (small, local) */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .anim-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  /* Guaranteed keyframes for custom animations used inline / by utilities */
+  @keyframes petal {
+    0%   { transform: translateY(-10%) rotate(0deg); opacity: 0; }
+    12%  { opacity: 0.7; }
+    85%  { opacity: 0.7; }
+    100% { transform: translateY(108vh) rotate(340deg); opacity: 0; }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes bloom {
+    0%   { opacity: 0; transform: scale(.86) translateY(26px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes swaySoft {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    50%      { transform: translateX(-12px) rotate(-3deg); }
+  }
+  @keyframes drift {
+    0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+    50%      { transform: translateY(-18px) translateX(10px) rotate(6deg); }
+  }
+  @keyframes floatSoft {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-12px) scale(1.03); }
+  }
+  @keyframes tiltFade {
+    0%   { opacity: 0; transform: translateY(18px) rotate(-2deg); }
+    100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: translateY(0) scale(.6); }
+    50%      { opacity: 0.9; transform: translateY(-10px) scale(1.05); }
+  }
+  @keyframes archDraw {
+    from { stroke-dashoffset: 520; }
+    to   { stroke-dashoffset: 0; }
+  }
+  @keyframes archDrawAlt {
+    from { stroke-dashoffset: 300; }
+    to   { stroke-dashoffset: 0; }
+  }
+  .arch-draw {
+    stroke-dasharray: 520;
+    animation: archDraw 3.2s ease-out forwards;
+  }
+  .arch-draw-2 {
+    stroke-dasharray: 300;
+    animation: archDrawAlt 3.6s ease-out 0.4s forwards;
+  }
+
+  /* Royal gold shimmer for accents */
+  .text-gold-shimmer {
+    background: linear-gradient(90deg, #B8860B 0%, #F3DCA9 25%, #D4AF37 50%, #F3DCA9 75%, #B8860B 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmerText 5s linear infinite;
+  }
+
+  /* Royal burst ring used by the morph scene */
+  @keyframes haloPulse {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50%      { opacity: 0.7; transform: scale(1.08); }
+  }
+
+  @keyframes cloudBob {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50%      { transform: translateY(-12px) translateX(8px); }
+  }
+
+  @keyframes wingFlap {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(-38deg); }
+  }
+
+  /* ===== Creative section animations ===== */
+
+  /* CountDown digit flip (piped when value changes) */
+  @keyframes digitFlip {
+    0%   { opacity: 0; transform: rotateX(-90deg) translateY(-8px); }
+    60%  { opacity: 1; transform: rotateX(12deg) translateY(0); }
+    100% { opacity: 1; transform: rotateX(0deg); }
+  }
+  .digit-flip {
+    display: inline-block;
+    animation: digitFlip 0.55s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  /* Ripple halo on primary CTA buttons */
+  @keyframes ctaRipple {
+    0%   { box-shadow: 0 0 0 0 rgba(76, 136, 100, 0.45); }
+    70%  { box-shadow: 0 0 0 16px rgba(76, 136, 100, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(76, 136, 100, 0); }
+  }
+  .cta-ripple { animation: ctaRipple 2.4s ease-out infinite; }
+
+  /* Timeline line draws downward when section appears */
+  @keyframes lineGrow {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+  }
+  .timeline-line {
+    transform-origin: top center;
+    animation: lineGrow 1.8s cubic-bezier(.22, 1, .36, 1) both;
+  }
+
+  /* Soft heartbeat for small icons */
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%      { transform: scale(1.28); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.22); }
+    56%      { transform: scale(1); }
+  }
+  .beat { animation: heartbeat 1.8s ease-in-out infinite; }
+
+  /* Slow vertical float for decorative hearts / photos */
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+  .float-y { animation: floatY 4.5s ease-in-out infinite; }
+
+  /* Golden glow breathing for gift card */
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 20px 50px -25px rgba(49, 87, 65, 0.45), 0 0 0 0 rgba(216, 149, 121, 0.0); }
+    50%      { box-shadow: 0 20px 50px -25px rgba(49, 87, 65, 0.45), 0 0 34px 2px rgba(216, 149, 121, 0.35); }
+  }
+  .glow-pulse { animation: glowPulse 3.2s ease-in-out infinite; }
+
+  /* Stream play button expanding rings */
+  @keyframes streamRing {
+    0%   { transform: scale(1); opacity: 0.55; }
+    100% { transform: scale(1.9); opacity: 0; }
+  }
+  .stream-ring { animation: streamRing 2s ease-out infinite; }
+
+  /* Monogram slow spin ring */
+  @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .spin-slow { animation: spinSlow 22s linear infinite; }
+
+  /* Light text shimmer for accents */
+  .text-shimmer {
+    background: linear-gradient(90deg, #BBD5C2 0%, #D89579 30%, #F3DCA9 50%, #D89579 70%, #BBD5C2 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmerText 4s linear infinite;
+  }
+  @keyframes shimmerText {
+    from { background-position: 0% center; }
+    to   { background-position: -200% center; }
+  }
+}

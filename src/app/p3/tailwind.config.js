@@ -1,0 +1,115 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        royal: {
+          50: '#F0ECF7',
+          100: '#DBD2EC',
+          200: '#B9A8DB',
+          300: '#977EC6',
+          400: '#765AAE',
+          500: '#5B3E97',
+          600: '#482F79',
+          700: '#38245E',
+          800: '#291A45',
+          900: '#1D1231',
+          950: '#120B1F',
+        },
+        gold: {
+          50: '#F7F8FA',
+          100: '#F5F6F8',
+          200: '#E4E7EC',
+          300: '#CDD2DA',
+          400: '#B3BAC6',
+          500: '#9CA5B3',
+          600: '#8E97A8',
+          700: '#747D8E',
+          800: '#5B6270',
+          900: '#414651',
+        },
+        burgundy: {
+          50: '#F4F0FA',
+          100: '#E9DFF4',
+          200: '#D9C7EC',
+          300: '#C0A6DE',
+          400: '#A384CD',
+          500: '#8663B7',
+          600: '#6B4A98',
+          700: '#523878',
+          800: '#3B2959',
+          900: '#281C3D',
+        },
+        ivory: '#F4F1F8',
+        cream: '#ECE8F3',
+        parchment: '#E0DBEC',
+      },
+      fontFamily: {
+        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'serif'],
+        script: ['"Great Vibes"', 'cursive'],
+        sans: ['Montserrat', 'sans-serif'],
+        cinzel: ['Cinzel', 'serif'],
+      },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+        'spin-slow': 'spin-slow 30s linear infinite',
+        'spin-slower': 'spin-slow 60s linear infinite',
+        'zoom-bg': 'zoomBg 25s ease-in-out infinite alternate',
+        'shimmer': 'shimmer 3s linear infinite',
+        'glow': 'glow 2.5s ease-in-out infinite',
+        'fall': 'fall linear infinite',
+        'sway': 'sway 5s ease-in-out infinite',
+        'fade-in': 'fadeIn 1.5s ease-out forwards',
+        'slide-up': 'slideUp 1s ease-out forwards',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-15px)' },
+        },
+        'pulse-soft': {
+          '0%, 100%': { transform: 'scale(1)', opacity: '0.8' },
+          '50%': { transform: 'scale(1.15)', opacity: '1', filter: 'drop-shadow(0 0 15px rgba(201,162,39,0.6))' },
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        zoomBg: {
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.15)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% center' },
+          '100%': { backgroundPosition: '200% center' },
+        },
+        glow: {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(201,162,39,0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(201,162,39,0.6)' },
+        },
+        fall: {
+          '0%': { transform: 'translateY(-5vh) rotate(0deg) scale(0.5)', opacity: '0' },
+          '10%': { opacity: '0.8', transform: 'translateY(0vh) rotate(45deg) scale(1)' },
+          '90%': { opacity: '0.8', transform: 'translateY(100vh) rotate(315deg) scale(1)' },
+          '100%': { transform: 'translateY(105vh) rotate(360deg) scale(0.5)', opacity: '0' },
+        },
+        sway: {
+          '0%, 100%': { transform: 'translateX(-20px)' },
+          '50%': { transform: 'translateX(20px)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+    },
+  },
+  plugins: [],
+};

@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Outfit:wght@200;300;400;500;600&display=swap');
+
+@import "tailwindcss";
+@config "./tailwind.config.js";
+
+@theme {
+  --color-fine-ivory: #FAF9F6;
+  --color-fine-sand: #F1EBE3;
+  --color-fine-sage: #7A9A6E;
+  --color-fine-charcoal: #2C322B;
+  --color-fine-gold: #C4A574;
+
+  --font-fine-serif: "Playfair Display", serif;
+  --font-fine-script: "Great Vibes", cursive;
+  --font-fine-sans: "Outfit", sans-serif;
+}
+
+@layer components {
+  .app-scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  .app-scroll::-webkit-scrollbar,
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 3px;
+  }
+  .app-scroll::-webkit-scrollbar-track,
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .app-scroll::-webkit-scrollbar-thumb,
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #7A9A6E;
+    border-radius: 10px;
+  }
+
+  .border-fine {
+    border-color: rgba(44, 50, 43, 0.12);
+  }
+
+  .fine-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    height: 1.5rem;
+  }
+  .fine-divider::before,
+  .fine-divider::after {
+    content: '';
+    height: 1px;
+    width: 40px;
+    background: linear-gradient(90deg, transparent, #7A9A6E, transparent);
+  }
+
+  .fine-art-img {
+    filter: grayscale(18%) contrast(1.04) brightness(1.03) saturate(0.88);
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale,
+  .reveal-blur {
+    opacity: 0;
+    transition: all 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal { transform: translateY(48px); }
+  .reveal-left { transform: translateX(-40px); }
+  .reveal-right { transform: translateX(40px); }
+  .reveal-scale { transform: scale(0.94); }
+  .reveal-blur { transform: translateY(24px); filter: blur(8px); }
+
+  .reveal.active,
+  .reveal-left.active,
+  .reveal-right.active {
+    opacity: 1;
+    transform: translate(0);
+  }
+  .reveal-scale.active { opacity: 1; transform: scale(1); }
+  .reveal-blur.active { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+  .reveal.exit-up { transform: translateY(-48px); }
+  .reveal-left.exit-up { transform: translateX(-40px); }
+  .reveal-right.exit-up { transform: translateX(40px); }
+  .reveal-scale.exit-up { transform: scale(1.04); }
+  .reveal-blur.exit-up { transform: translateY(-24px); filter: blur(8px); }
+}
